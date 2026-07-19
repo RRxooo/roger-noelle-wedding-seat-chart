@@ -599,10 +599,6 @@ function setLang(lang) {
   // Update footer
   document.querySelector('footer').innerHTML = t('footer');
 
-  // Update venue line
-  const vl = document.querySelector('.venue-line');
-  if (vl) vl.innerHTML = `${VENUE.addr} <span>·</span> ${VENUE.mrt}`;
-
   // Refresh current view
   refreshView();
 }
