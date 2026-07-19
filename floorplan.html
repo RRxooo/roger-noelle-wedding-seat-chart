@@ -290,11 +290,7 @@
     font-size: 22px;
   }
   .tbl.vip .sub { color: rgba(255,255,255,0.85); }
-  .tbl.spacer {
-    border-color: transparent;
-    background: transparent;
-    visibility: hidden;
-  }
+
 
   /* Right fixture */
   .right-fixture {
@@ -308,31 +304,6 @@
     border-radius: 3px;
     border: 1px solid #99D6BF;
     z-index: 1;
-  }
-
-  /* Entrance door */
-  .entrance-mark {
-    position: absolute;
-    right: 8px;
-    bottom: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    z-index: 3;
-  }
-  .entrance-arrow {
-    font-size: 18px;
-    color: #2C2C2C;
-    opacity: 0.5;
-    transform: rotate(-90deg);
-  }
-  .entrance-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 9px;
-    color: #5A5A5A;
-    letter-spacing: 0.1em;
-    font-weight: 600;
   }
 
   /* Floor fixtures */
@@ -474,7 +445,7 @@
           <div class="tbl">发财<span class="sub">Fortune</span></div>
         </div>
 
-        <!-- Back row — 6 tables + 1 spacer for centering -->
+        <!-- Back row — 6 tables -->
         <div class="table-row">
           <div class="tbl">二萬<span class="sub">20,000</span></div>
           <div class="tbl">四萬<span class="sub">40,000</span></div>
@@ -482,17 +453,14 @@
           <div class="tbl">八萬<span class="sub">80,000</span></div>
           <div class="tbl">白板<span class="sub">Blank</span></div>
           <div class="tbl">红中<span class="sub">Centre</span></div>
-          <div class="tbl spacer"></div>
+          <div style="width:128px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+            <div style="font-size:22px;color:#2C2C2C;opacity:0.35">⬇</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:9px;color:#5A5A5A;letter-spacing:0.1em;font-weight:600">ENTRANCE</div>
+          </div>
         </div>
 
         <!-- Right fixture -->
         <div class="right-fixture"></div>
-
-        <!-- Entrance door -->
-        <div class="entrance-mark">
-          <div class="entrance-arrow">➤</div>
-          <div class="entrance-label">ENTRANCE</div>
-        </div>
       </div>
 
       <!-- Floor fixtures -->
