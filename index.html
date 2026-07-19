@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💍 Seating Chart — Roger &amp; Noelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── Reset & Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+
+:root{
+  --sage:#7B8F6E;
+  --sage-dark:#5E6F53;
+  --sage-light:#C5D0B8;
+  --sage-mist:#E8EDE0;
+  --champagne:#F7EAD0;
+  --champagne-light:#FDF7ED;
+  --champagne-dark:#D4C4A8;
+  --cream:#FFFAF3;
+  --ink:#2C2C2C;
+  --ink-soft:#5A5A5A;
+  --ink-muted:#8A8A8A;
+  --gold:#C4A962;
+  --gold-light:#E8D9A8;
+  --white:#FFFFFF;
+  --shadow:0 4px 24px rgba(44,44,44,0.08);
+  --radius:12px;
+  --radius-sm:8px;
+}
+
+body{
+  font-family:'Cormorant Garamond','Noto Sans SC',Georgia,serif;
+  background:var(--cream);
+  color:var(--ink);
+  min-height:100vh;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Header ── */
+header{
+  background:linear-gradient(135deg,var(--sage)0%,var(--sage-dark)100%);
+  color:var(--white);text-align:center;
+  padding:2.5rem 1.25rem 2rem;position:relative;overflow:hidden
+}
+header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:6px;
+  background:linear-gradient(90deg,var(--gold-light),var(--gold),var(--champagne),var(--gold),var(--gold-light));
+  opacity:.6
+}
+header h1{
+  font-family:'Playfair Display',serif;
+  font-weight:600;font-size:2rem;letter-spacing:.06em;margin-bottom:.25rem
+}
+header .subtitle{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-weight:400;font-size:1.05rem;opacity:.85;letter-spacing:.04em
+}
+header .couple{
+  font-size:1.1rem;margin-top:.5rem;opacity:.9;letter-spacing:.08em
+}
+header .guest-count{
+  display:inline-block;margin-top:.75rem;padding:.3rem 1.25rem;
+  background:rgba(255,255,255,.15);border-radius:20px;
+  font-size:.9rem;font-style:italic;letter-spacing:.04em
+}
+
+/* ── Search ── */
+.search-section{
+  max-width:640px;margin:-1.25rem auto 0;
+  padding:0 1.25rem;position:relative;z-index:10
+}
+.search-wrapper{
+  background:var(--white);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:.25rem 1rem;
+  display:flex;align-items:center;gap:.5rem;
+  border:2px solid transparent;transition:border-color .3s,box-shadow .3s
+}
+.search-wrapper:focus-within{
+  border-color:var(--sage);
+  box-shadow:0 4px 28px rgba(123,143,110,.15)
+}
+.search-wrapper .icon{font-size:1.25rem;opacity:.5;flex-shrink:0}
+.search-wrapper input{
+  flex:1;border:none;outline:none;padding:.85rem 0;
+  font-family:'Cormorant Garamond',serif;font-size:1.15rem;
+  color:var(--ink);background:transparent
+}
+.search-wrapper input::placeholder{
+  color:var(--ink-muted);font-style:italic;letter-spacing:.03em
+}
+.search-wrapper .clear-btn{
+  background:none;border:none;font-size:1.1rem;opacity:0;
+  cursor:pointer;transition:opacity .2s;padding:.25rem;color:var(--ink-soft)
+}
+.search-wrapper .clear-btn.visible{opacity:.5}
+.search-wrapper .clear-btn.visible:hover{opacity:.8}
+
+/* ── Generic term tooltip ── */
+.generic-tip{
+  background:var(--champagne);border:1px solid var(--gold-light);
+  border-radius:var(--radius);padding:1rem 1.25rem;margin-top:.75rem;
+  text-align:center;animation:fadeIn .35s ease
+}
+.generic-tip .tip-icon{font-size:1.5rem;margin-bottom:.25rem}
+.generic-tip p{font-size:1rem;color:var(--ink-soft);margin-bottom:.3rem}
+.generic-tip .tip-sub{font-style:italic;font-size:.9rem;color:var(--ink-muted)}
+
+/* ── Container ── */
+.container{max-width:720px;margin:1.5rem auto;padding:0 1.25rem 3rem}
+
+/* ── Initial state ── */
+.initial-state{
+  text-align:center;padding:3rem 1rem 2rem;animation:fadeIn .5s ease
+}
+.initial-state .deco-icon{font-size:3rem;margin-bottom:1rem;opacity:.6}
+.initial-state h2{
+  font-family:'Playfair Display',serif;font-weight:500;
+  font-size:1.4rem;color:var(--ink-soft);margin-bottom:.5rem
+}
+.initial-state p{color:var(--ink-muted);font-style:italic;font-size:1rem}
+
+/* ── Guest list ── */
+.guest-list{
+  display:flex;flex-direction:column;gap:.5rem;animation:fadeIn .35s ease
+}
+.guest-card{
+  background:var(--white);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:1rem 1.25rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+  border:1px solid transparent
+}
+.guest-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(44,44,44,.1);
+  border-color:var(--sage-light)
+}
+.guest-card:active{transform:translateY(0)}
+.guest-card .guest-name{
+  font-size:1.15rem;font-weight:600;color:var(--ink);letter-spacing:.02em
+}
+.guest-card .table-badge{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.3rem .75rem;border-radius:20px;
+  background:var(--sage-mist);color:var(--sage-dark);
+  font-size:.85rem;font-weight:500;letter-spacing:.04em;white-space:nowrap;flex-shrink:0
+}
+
+/* ── No results ── */
+.no-results{
+  text-align:center;padding:3rem 1rem;animation:fadeIn .4s ease
+}
+.no-results .sad-icon{font-size:2.5rem;margin-bottom:1rem;opacity:.5}
+.no-results h3{
+  font-family:'Playfair Display',serif;font-weight:500;
+  color:var(--ink-soft);margin-bottom:.5rem;font-size:1.3rem
+}
+.no-results p{color:var(--ink-muted);font-size:1rem;margin-bottom:.3rem}
+.no-results .tips{margin-top:1rem;font-size:.9rem;color:var(--ink-muted);line-height:1.8}
+
+/* ── Modal ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(44,44,44,.5);backdrop-filter:blur(4px);
+  z-index:1000;animation:fadeIn .25s ease;overflow-y:auto;padding:1.25rem
+}
+.modal-overlay.active{display:flex;align-items:flex-start;justify-content:center;padding-top:3rem}
+.modal{
+  background:var(--white);border-radius:var(--radius);
+  max-width:540px;width:100%;
+  box-shadow:0 12px 48px rgba(44,44,44,.18);
+  animation:slideUp .35s ease;overflow:hidden
+}
+.modal-header{
+  background:linear-gradient(135deg,var(--sage)0%,var(--sage-dark)100%);
+  color:var(--white);padding:1.5rem 1.5rem 1.25rem;position:relative
+}
+.modal-header .close-btn{
+  position:absolute;top:.75rem;right:.75rem;
+  background:rgba(255,255,255,.15);border:none;color:var(--white);
+  width:32px;height:32px;border-radius:50%;font-size:1.15rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s
+}
+.modal-header .close-btn:hover{background:rgba(255,255,255,.3)}
+.modal-header h2{
+  font-family:'Playfair Display',serif;font-weight:600;
+  font-size:1.5rem;letter-spacing:.04em
+}
+.modal-header .table-subtitle{
+  font-size:.95rem;opacity:.8;margin-top:.2rem;font-style:italic
+}
+.modal-body{padding:1.25rem 1.5rem 1.5rem}
+
+/* ── Round table ── */
+.table-visual{display:flex;justify-content:center;margin-bottom:1.5rem}
+.round-table{
+  position:relative;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,var(--champagne-light),var(--champagne)60%,var(--champagne-dark)100%);
+  border:3px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(196,169,98,.2),inset 0 -4px 12px rgba(0,0,0,.04)
+}
+.round-table .table-label{text-align:center;font-family:'Playfair Display',serif;font-weight:600;letter-spacing:.04em}
+.round-table .table-label .tile-name{font-size:1.3rem;color:var(--sage-dark)}
+.round-table .table-label .tile-cap{font-size:.8rem;color:var(--ink-muted);margin-top:.15rem;font-style:italic}
+.seat-marker{
+  position:absolute;width:10px;height:10px;border-radius:50%;
+  background:var(--sage-light);border:2px solid var(--white);
+  box-shadow:0 1px 4px rgba(0,0,0,.1);transition:transform .2s
+}
+.seat-marker.filled{background:var(--sage)}
+
+/* ── Table guest list ── */
+.table-guest-list{display:flex;flex-direction:column;gap:.3rem}
+.table-guest-item{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.6rem 0;border-bottom:1px solid var(--champagne);
+  font-size:1rem
+}
+.table-guest-item:last-child{border-bottom:none}
+.table-guest-item .seat-num{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--sage-mist);color:var(--sage-dark);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:600;flex-shrink:0
+}
+.table-guest-item .guest-name{color:var(--ink);font-weight:500}
+.table-count{
+  margin-top:1rem;padding:.75rem;background:var(--sage-mist);
+  border-radius:var(--radius-sm);text-align:center;
+  font-style:italic;font-size:.9rem;color:var(--sage-dark);letter-spacing:.03em
+}
+
+/* ── Animations ── */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Footer ── */
+footer{
+  text-align:center;padding:1.5rem;
+  color:var(--ink-muted);font-size:.8rem;font-style:italic;
+  letter-spacing:.03em;opacity:.6
+}
+
+@media(max-width:480px){
+  header{padding:2rem 1rem 1.5rem}
+  header h1{font-size:1.6rem}
+  .search-section{padding:0 1rem}
+  .container{padding:1rem 1rem 2rem}
+  .guest-card{padding:.85rem 1rem}
+  .round-table{width:180px;height:180px}
+  .modal-header{padding:1.25rem 1.25rem 1rem}
+  .modal-body{padding:1rem 1.25rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>💍 座位表</h1>
+  <div class="subtitle">— Seating Chart —</div>
+  <div class="couple">Roger &amp; Noelle</div>
+  <div class="guest-count" id="guestCount">135 guests · 13 tables</div>
+</header>
+
+<div class="search-section">
+  <div class="search-wrapper">
+    <span class="icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search by name…" autocomplete="off">
+    <button class="clear-btn" id="clearBtn">✕</button>
+  </div>
+</div>
+
+<div class="container" id="appContainer">
+  <div class="initial-state" id="initialState">
+    <div class="deco-icon">🌿</div>
+    <h2>Find Your Table</h2>
+    <p>Type a name above to locate your seat</p>
+  </div>
+  <div id="resultsArea"></div>
+  <div id="genericTip"></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="close-btn" id="modalClose">✕</button>
+      <h2 id="modalTitle">VIP</h2>
+      <div class="table-subtitle" id="modalSubtitle"></div>
+    </div>
+    <div class="modal-body">
+      <div class="table-visual">
+        <div class="round-table" id="roundTable">
+          <div class="table-label">
+            <div class="tile-name" id="tableTileName">VIP</div>
+            <div class="tile-cap" id="tableTileCap"></div>
+          </div>
+        </div>
+      </div>
+      <div class="table-guest-list" id="tableGuestList"></div>
+      <div class="table-count" id="tableCount"></div>
+    </div>
+  </div>
+</div>
+
+<footer>❤️ 百年好合 · Roger &amp; Noelle</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   GUEST DATA — embed exactly as provided
+   ══════════════════════════════════════════ */
+const guestData = [
+  {name:"Noelle's Grandma",table:"VIP"},{name:"Noelle's Dad",table:"VIP"},{name:"Noelle's Mother",table:"VIP"},{name:"Er Su",table:"VIP"},{name:"Er Shen",table:"VIP"},{name:"Noelle",table:"VIP"},{name:"Roger",table:"VIP"},{name:"Agnes",table:"VIP"},{name:"Tan Kim San",table:"VIP"},{name:"Roy Tan",table:"VIP"},{name:"Lynette",table:"VIP"},{name:"Ryan",table:"VIP"},
+  {name:"Xiao Gu's MIL",table:"一萬"},{name:"Da Gu",table:"一萬"},{name:"Da Gu Zhang",table:"一萬"},{name:"Xiao Gu",table:"一萬"},{name:"Xiao Gu's Husband",table:"一萬"},{name:"Angelia",table:"一萬"},{name:"Thomas",table:"一萬"},{name:"Da ge",table:"一萬"},{name:"Da Sai",table:"一萬"},{name:"Thrid Aunt",table:"一萬"},
+  {name:"Kaishun",table:"二萬"},{name:"Xin Yi",table:"二萬"},{name:"Xin Le",table:"二萬"},{name:"Eeying",table:"二萬"},{name:"Eeying +1",table:"二萬"},{name:"Ee wei",table:"二萬"},{name:"Ee Wei +1",table:"二萬"},{name:"Ng Yin Lin",table:"二萬"},{name:"Michael",table:"二萬"},{name:"Er Gu",table:"二萬"},
+  {name:"Jia Ming",table:"三萬"},{name:"Hui Lin",table:"三萬"},{name:"Hui Lin's Mother",table:"三萬"},{name:"Hui Qi",table:"三萬"},{name:"Carrie",table:"三萬"},{name:"Noelle's Brother",table:"三萬"},{name:"Noelle's Sister In Law",table:"三萬"},{name:"Ee ming",table:"三萬"},{name:"Tee Kai Meng",table:"三萬"},{name:"Kai Xiang",table:"三萬"},{name:"Jing yee",table:"三萬"},
+  {name:"Shee Hui",table:"四萬"},{name:"Chock",table:"四萬"},{name:"Chock + 1",table:"四萬"},{name:"Heng Jie",table:"四萬"},{name:"Ang",table:"四萬"},{name:"Shikin",table:"四萬"},{name:"Shikin + 1",table:"四萬"},{name:"Fangzi",table:"四萬"},{name:"Brandon",table:"四萬"},{name:"Tina",table:"四萬"},{name:"Vishal",table:"四萬"},{name:"Yoon Jung",table:"四萬"},
+  {name:"Wu You",table:"五萬"},{name:"Phyu",table:"五萬"},{name:"Christine",table:"五萬"},{name:"Pei Fang",table:"五萬"},{name:"Deon",table:"五萬"},{name:"Laura",table:"五萬"},{name:"Nicole",table:"五萬"},{name:"Cayden Chow",table:"五萬"},{name:"Meijie",table:"五萬"},{name:"HuiChing",table:"五萬"},
+  {name:"Lao yi",table:"六萬"},{name:"Lao yi Zhang",table:"六萬"},{name:"Wen Chong",table:"六萬"},{name:"Li Xia",table:"六萬"},{name:"Lao Yi",table:"六萬"},{name:"Lao Yi Zhang",table:"六萬"},{name:"Teo Chwee",table:"六萬"},{name:"Ai Ping / Asyuru",table:"六萬"},{name:"Kevin",table:"六萬"},{name:"Ang Kiat",table:"六萬"},
+  {name:"Tan Kim Hock",table:"七萬"},{name:"Tan Kim Hock's Wife",table:"七萬"},{name:"Tan Kim Hock Ah Sang",table:"七萬"},{name:"Tan Kim Hua & family",table:"七萬"},{name:"Tan Kim Hua's Wife",table:"七萬"},{name:"Tan Kim Hua's Jean",table:"七萬"},{name:"Tan Kim Hua's Partner",table:"七萬"},{name:"Tan Kim Hua's Joseph",table:"七萬"},{name:"Tan Kim Hua's youngest",table:"七萬"},{name:"Tan Kim Huay",table:"七萬"},
+  {name:"Low Pek Ngoh",table:"八萬"},{name:"Joey",table:"八萬"},{name:"Joey's Clarence",table:"八萬"},{name:"Lim Choo Thai",table:"八萬"},{name:"Wilson",table:"八萬"},{name:"Susanna",table:"八萬"},{name:"Eric",table:"八萬"},{name:"Jolyee",table:"八萬"},{name:"Jennifer",table:"八萬"},{name:"Ricky",table:"八萬"},
+  {name:"Gary",table:"九萬"},{name:"Dickson",table:"九萬"},{name:"Jade",table:"九萬"},{name:"Vivienne",table:"九萬"},{name:"Chong",table:"九萬"},{name:"David Koh",table:"九萬"},{name:"Patricia Sim",table:"九萬"},{name:"Aaron Wong",table:"九萬"},{name:"Jennifer",table:"九萬"},{name:"Simon",table:"九萬"},
+  {name:"Herman's Mum",table:"发财"},{name:"Herman",table:"发财"},{name:"Bella",table:"发财"},{name:"Chuan Sheng",table:"发财"},{name:"Shawn",table:"发财"},{name:"Jun Jie",table:"发财"},{name:"Jun Jie+1",table:"发财"},{name:"Teo Chwee's children",table:"发财"},{name:"Teo Chwee's children 2",table:"发财"},{name:"Teo Chwee's children 3",table:"发财"},
+  {name:"Peter",table:"白板"},{name:"Madgeline",table:"白板"},{name:"Morgan",table:"白板"},{name:"Adeline",table:"白板"},{name:"Theodoric Tay",table:"白板"},{name:"Stephane",table:"白板"},{name:"Javen Tan",table:"白板"},{name:"Seah Ai Keok",table:"白板"},{name:"Jennifer Sia",table:"白板"},{name:"Sally Chee",table:"白板"},
+  {name:"Mok",table:"红中"},{name:"Mama",table:"红中"},{name:"Faizi",table:"红中"},{name:"Sharon",table:"红中"},{name:"Sharon Mother",table:"红中"},{name:"Ramy",table:"红中"},{name:"Fanny / Aiysah",table:"红中"},{name:"Hudhayfah Umar",table:"红中"},{name:"Wani",table:"红中"},{name:"Yanto",table:"红中"}
+];
+
+/* ── Table definitions ── */
+const tableOrder = ["VIP","一萬","二萬","三萬","四萬","五萬","六萬","七萬","八萬","九萬","发财","白板","红中"];
+
+/* ── Table display names with emoji ── */
+const tableLabel = {
+  "VIP":  "👑 VIP",
+  "一萬": "🀄 一萬","二萬": "🀄 二萬","三萬": "🀄 三萬",
+  "四萬": "🀄 四萬","五萬": "🀄 五萬","六萬": "🀄 六萬",
+  "七萬": "🀄 七萬","八萬": "🀄 八萬","九萬": "🀄 九萬",
+  "发财": "🀄 发财","白板": "🀄 白板","红中": "🀄 红中"
+};
+
+/* ── Compute table capacities ── */
+function getTableCapacity(t) {
+  return guestData.filter(g => g.table === t).length;
+}
+
+/* ── Generic/relational terms that trigger a tooltip ── */
+const genericTerms = ["+1","+ 1","children","child","mother","mother's","wife","wife's",
+  "mum","dad","grandma","grandfather","grandmother","brother","sister",
+  "husband","family","mil","father","father's","sister in law","sister-in-law"];
+
+function isGenericSearch(q) {
+  const lower = q.trim().toLowerCase();
+  if (!lower) return false;
+  // Exact match or the whole query is one of these terms
+  return genericTerms.some(t => lower === t);
+}
+
+/* ══════════════════════════════════════════
+   UI LOGIC
+   ══════════════════════════════════════════ */
+
+const searchInput  = document.getElementById('searchInput');
+const clearBtn     = document.getElementById('clearBtn');
+const resultsArea  = document.getElementById('resultsArea');
+const genericTip   = document.getElementById('genericTip');
+const initialState = document.getElementById('initialState');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalClose   = document.getElementById('modalClose');
+
+/* ── Search ── */
+searchInput.addEventListener('input', function() {
+  const q = this.value.trim();
+  clearBtn.classList.toggle('visible', q.length > 0);
+
+  if (q.length === 0) {
+    showInitial();
+    return;
+  }
+
+  // Check generic term
+  if (isGenericSearch(q)) {
+    showGenericTip(q);
+    return;
+  }
+
+  clearGenericTip();
+  performSearch(q);
+});
+
+clearBtn.addEventListener('click', function() {
+  searchInput.value = '';
+  clearBtn.classList.remove('visible');
+  clearGenericTip();
+  showInitial();
+  searchInput.focus();
+});
+
+function performSearch(query) {
+  const lower = query.toLowerCase();
+  const matches = guestData.filter(g =>
+    g.name.toLowerCase().includes(lower)
+  );
+
+  if (matches.length === 0) {
+    showNoResults(query);
+  } else {
+    showResults(matches, query);
+  }
+}
+
+/* ── Generic term tooltip ── */
+function showGenericTip(term) {
+  initialState.style.display = 'none';
+  resultsArea.innerHTML = '';
+  genericTip.innerHTML = `
+    <div class="generic-tip">
+      <div class="tip-icon">🔍</div>
+      <p>Guest matching "<strong>${escapeHtml(term)}</strong>" may be listed under the <strong>primary invitee's name</strong>.</p>
+      <p class="tip-sub">Try searching for the person they are accompanying or their family name.</p>
+    </div>
+  `;
+}
+
+function clearGenericTip() {
+  genericTip.innerHTML = '';
+}
+
+/* ── States ── */
+function showInitial() {
+  initialState.style.display = 'block';
+  resultsArea.innerHTML = '';
+  clearGenericTip();
+}
+
+function showResults(matches, query) {
+  initialState.style.display = 'none';
+  const html = `<div class="guest-list">${
+    matches.map(g =>
+      `<div class="guest-card" onclick="openTable('${g.table}')">
+        <span class="guest-name">${highlight(g.name, query)}</span>
+        <span class="table-badge">${tableLabel[g.table] || g.table}</span>
+      </div>`
+    ).join('')
+  }</div>`;
+  resultsArea.innerHTML = html;
+}
+
+function showNoResults(query) {
+  initialState.style.display = 'none';
+  resultsArea.innerHTML = `
+    <div class="no-results">
+      <div class="sad-icon">🌿</div>
+      <h3>Name not found</h3>
+      <p>We couldn't find "<strong>${escapeHtml(query)}</strong>" in the guest list.</p>
+      <div class="tips">
+        🔹 Check the spelling<br>
+        🔹 Try just the first name or surname<br>
+        🔹 If the guest was invited as a "+1" or family member,<br>
+        &nbsp;&nbsp;&nbsp;search for the main invitee's name instead<br>
+        🔹 Ask a member of the wedding party for help
+      </div>
+    </div>
+  `;
+}
+
+/* ── Helpers ── */
+function highlight(text, query) {
+  if (!text || !query) return escapeHtml(text||'');
+  const escaped = escapeHtml(text);
+  const q = escapeHtml(query);
+  const regex = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi');
+  return escaped.replace(regex,'<mark style="background:var(--champagne);color:var(--ink);padding:0 2px;border-radius:2px;">$1</mark>');
+}
+
+function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+/* ══════════════════════════════════════════
+   TABLE VIEW
+   ══════════════════════════════════════════ */
+
+function openTable(tableName) {
+  const guests = guestData.filter(g => g.table === tableName);
+  const cap = guests.length;
+
+  document.getElementById('modalTitle').textContent = tableLabel[tableName] || tableName;
+  document.getElementById('modalSubtitle').textContent = `${guests.length} guest${guests.length !== 1 ? 's' : ''}`;
+  document.getElementById('tableTileName').textContent = tableName;
+  document.getElementById('tableTileCap').textContent = `${guests.length} seat${guests.length !== 1 ? 's' : ''}`;
+
+  // Round table seats
+  const tableEl = document.getElementById('roundTable');
+  tableEl.querySelectorAll('.seat-marker').forEach(el => el.remove());
+
+  for (let i = 0; i < Math.max(cap, 10); i++) {
+    const angle = (i * (360 / Math.max(cap, 10)) - 90) * (Math.PI / 180);
+    const radius = 85;
+    const cx = 110, cy = 110;
+    const x = cx + radius * Math.cos(angle) - 5;
+    const y = cy + radius * Math.sin(angle) - 5;
+    const dot = document.createElement('div');
+    dot.className = 'seat-marker' + (i < cap ? ' filled' : '');
+    dot.style.left = x + 'px';
+    dot.style.top = y + 'px';
+    tableEl.appendChild(dot);
+  }
+
+  // Guest list
+  document.getElementById('tableGuestList').innerHTML = guests.map((g, i) =>
+    `<div class="table-guest-item">
+      <span class="seat-num">${i + 1}</span>
+      <span class="guest-name">${escapeHtml(g.name)}</span>
+    </div>`
+  ).join('');
+
+  document.getElementById('tableCount').textContent = `${guests.length} guest${guests.length !== 1 ? 's' : ''} at this table`;
+
+  // Show
+  modalOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modalOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Update guest count in header
+document.getElementById('guestCount').textContent =
+  `${guestData.length} guests · ${tableOrder.length} tables`;
+
+showInitial();
+</script>
+</body>
+</html>
