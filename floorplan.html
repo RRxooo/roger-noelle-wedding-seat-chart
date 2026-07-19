@@ -310,15 +310,29 @@
     z-index: 1;
   }
 
-  /* Exit mark */
-  .exit-mark {
+  /* Entrance door */
+  .entrance-mark {
     position: absolute;
-    right: 22px;
-    bottom: 28px;
-    font-size: 14px;
-    color: #5A5A5A;
+    right: 8px;
+    bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
     z-index: 3;
+  }
+  .entrance-arrow {
+    font-size: 18px;
+    color: #2C2C2C;
     opacity: 0.5;
+    transform: rotate(-90deg);
+  }
+  .entrance-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9px;
+    color: #5A5A5A;
+    letter-spacing: 0.1em;
+    font-weight: 600;
   }
 
   /* Floor fixtures */
@@ -419,11 +433,6 @@
   </div>
 
   <!-- ═══ LOGO ═══ -->
-  <div class="venue-logo">
-    <div class="jen">JEN</div>
-    <div class="by">BY SHANGRI-LA</div>
-    <div class="loc">SINGAPORE<br>TANGLIN</div>
-  </div>
 
   <!-- ═══ HEADER ═══ -->
   <div class="header">
@@ -479,8 +488,11 @@
         <!-- Right fixture -->
         <div class="right-fixture"></div>
 
-        <!-- Exit direction -->
-        <div class="exit-mark">➤</div>
+        <!-- Entrance door -->
+        <div class="entrance-mark">
+          <div class="entrance-arrow">➤</div>
+          <div class="entrance-label">ENTRANCE</div>
+        </div>
       </div>
 
       <!-- Floor fixtures -->
