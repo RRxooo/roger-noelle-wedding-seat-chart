@@ -894,6 +894,13 @@ function renderMiniFloorplan(tableName) {
     html += '</div>';
   });
   seat.innerHTML = html;
+
+  // Update the "Tap to enlarge" link to pass table name
+  const enlargeLink = document.querySelector('.mfp-click');
+  if (enlargeLink) {
+    enlargeLink.setAttribute('onclick',
+      `window.open('floorplan.html?table=${encodeURIComponent(tableName)}','_blank')`);
+  }
 }
 
 /* ── Helpers ── */
