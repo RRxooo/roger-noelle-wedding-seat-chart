@@ -85,9 +85,9 @@ header .guest-count{
   background:var(--cream);border-bottom:1px solid var(--champagne-dark);
   padding:.65rem 1rem;text-align:center
 }
-.venue-banner .venue-name{font-weight:600;color:var(--sage-dark);font-size:.95rem;letter-spacing:.03em}
-.venue-banner .venue-line{font-size:.8rem;color:var(--ink-soft);margin-top:2px}
-.venue-banner .venue-line span{margin:0 .4rem;opacity:.4}
+.venue-line{font-size:.82rem;color:var(--ink-soft)}
+.venue-line:first-child{font-weight:600;color:var(--sage-dark);font-size:.95rem;letter-spacing:.03em}
+.venue-line + .venue-line{margin-top:3px}
 
 /* ── Countdown ── */
 .countdown-bar{
@@ -359,8 +359,8 @@ footer{
   header .couple{font-size:.92rem}
   .lang-btn{font-size:.65rem;padding:3px 8px}
   .venue-banner{padding:.5rem .75rem}
-  .venue-banner .venue-name{font-size:.85rem}
-  .venue-banner .venue-line{font-size:.72rem}
+  .venue-line:first-child{font-size:.85rem}
+  .venue-line{font-size:.72rem}
   .countdown-bar{padding:.4rem .75rem}
   .countdown-bar .cd-label{font-size:.7rem}
   .countdown-bar .cd-digits{font-size:.82rem}
@@ -414,8 +414,9 @@ footer{
 
 <!-- ═══ VENUE ═══ -->
 <div class="venue-banner">
-  <div class="venue-name"><a href="https://www.google.com/maps/search/?api=1&query=JEN+Singapore+Tanglin+by+Shangri-La+1A+Cuscaden+Road" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">📍 JEN Singapore Tanglin by Shangri-La</a></div>
-  <div class="venue-line"><a href="https://www.google.com/maps/search/?api=1&query=1A+Cuscaden+Road+Singapore+249716" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">1A Cuscaden Road, Singapore 249716</a> <span>·</span> Orchard Boulevard MRT (TE13) Exit 1</div>
+  <div class="venue-line"><a href="https://www.google.com/maps/search/?api=1&query=JEN+Singapore+Tanglin+by+Shangri-La+1A+Cuscaden+Road" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">📍 JEN Singapore Tanglin by Shangri-La</a></div>
+  <div class="venue-line"><a href="https://www.google.com/maps/search/?api=1&query=1A+Cuscaden+Road+Singapore+249716" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">🗺️ 1A Cuscaden Road, Singapore 249716</a></div>
+  <div class="venue-line">🚇 Orchard Boulevard MRT (TE13) Exit 1</div>
 </div>
 
 <div class="search-section">
