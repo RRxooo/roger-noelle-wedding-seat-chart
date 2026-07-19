@@ -364,7 +364,10 @@ header .guest-count{
   display:flex;flex-direction:column;justify-content:center;gap:8px
 }
 .mfp-row{
-  display:flex;justify-content:center;align-items:center;gap:6px
+  text-align:center
+}
+.mfp-row-inner{
+  display:inline-flex;justify-content:center;align-items:center;gap:6px
 }
 .mfp-dot{
   width:16px;height:16px;border-radius:50%;border:1.5px solid #2C2C2C;
@@ -427,7 +430,7 @@ footer{
   .mini-floorplan .mfp-container{height:110px}
   .mfp-dot{width:14px;height:14px}
   .mfp-dot.vip-dot,.mfp-dot.highlight.vip-dot{width:16px;height:16px}
-  .mfp-row{gap:5px}
+  .mfp-row-inner{gap:5px}
 }
 
 @media(max-width:380px){
@@ -887,7 +890,7 @@ function renderMiniFloorplan(tableName) {
 
   let html = '';
   floorplanRows.forEach((row, ri) => {
-    html += '<div class="mfp-row">';
+    html += '<div class="mfp-row"><div class="mfp-row-inner">';
     row.forEach(tbl => {
       const isVip = tbl === 'VIP';
       const isMatch = tbl === tableName;
@@ -900,7 +903,7 @@ function renderMiniFloorplan(tableName) {
     if (ri === 1) {
       html += `<div class="mfp-dot" style="border-color:transparent;background:transparent;pointer-events:none;width:18px;height:18px"></div>`;
     }
-    html += '</div>';
+    html += '</div></div>';
   });
   seat.innerHTML = html;
 
