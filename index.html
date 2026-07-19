@@ -89,10 +89,10 @@ header .guest-count{
 .venue-banner .venue-line{font-size:.8rem;color:var(--ink-soft);margin-top:2px}
 .venue-banner .venue-line span{margin:0 .4rem;opacity:.4}
 
-/* ── Countdown (nested inside search-section) ── */
+/* ── Countdown ── */
 .countdown-bar{
   background:var(--sage-mist);padding:.5rem 1rem;text-align:center;
-  border-radius:var(--radius) var(--radius) 0 0;margin-bottom:0
+  border-radius:var(--radius);margin-bottom:.75rem
 }
 .countdown-bar .cd-label{font-size:.78rem;color:var(--ink-muted);font-style:italic;letter-spacing:.04em}
 .countdown-bar .cd-digits{
@@ -420,15 +420,6 @@ footer{
 </div>
 
 <div class="search-section">
-  <div class="countdown-bar">
-    <div class="cd-label" id="cdLabel">Counting down to the big day…</div>
-    <div class="cd-digits" id="cdDigits">
-      <span class="cd-num" id="cdDays">--</span><span class="cd-sep">d</span>
-      <span class="cd-num" id="cdHours">--</span><span class="cd-sep">h</span>
-      <span class="cd-num" id="cdMins">--</span><span class="cd-sep">m</span>
-      <span class="cd-num" id="cdSecs">--</span><span class="cd-sep">s</span>
-    </div>
-  </div>
   <div class="search-wrapper">
     <span class="icon">🔍</span>
     <input type="text" id="searchInput" placeholder="Search by name…" autocomplete="off">
@@ -445,6 +436,17 @@ footer{
   <!-- ═══ All Tables view ═══ -->
   <div class="all-tables-view" id="allTablesView">
     <div class="all-tables-list" id="allTablesList"></div>
+  </div>
+
+  <!-- ═══ Countdown ═══ -->
+  <div class="countdown-bar">
+    <div class="cd-label" id="cdLabel">Counting down to the big day…</div>
+    <div class="cd-digits" id="cdDigits">
+      <span class="cd-num" id="cdDays">--</span><span class="cd-sep">d</span>
+      <span class="cd-num" id="cdHours">--</span><span class="cd-sep">h</span>
+      <span class="cd-num" id="cdMins">--</span><span class="cd-sep">m</span>
+      <span class="cd-num" id="cdSecs">--</span><span class="cd-sep">s</span>
+    </div>
   </div>
 
   <!-- ═══ Initial state ═══ -->
