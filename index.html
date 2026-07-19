@@ -785,10 +785,10 @@ function showResults(matches, query) {
   }</div>`;
 
   // Build inline table previews — show ALL guests at each matched table
-  const previews = tables.map(t => {
-    const guests = guestData.filter(g => g.table === t);
-    return `<div class="table-preview" onclick="openTable('${t}')">
-      <div class="tp-title">${tableLabel[t] || t} <span style="font-style:italic;font-size:.82rem;color:var(--ink-muted);font-weight:400">(${guests.length} ${guests.length > 1 ? t('guestPlural') : t('guestSingular')})</span></div>
+  const previews = tables.map(tbl => {
+    const guests = guestData.filter(g => g.table === tbl);
+    return `<div class="table-preview" onclick="openTable('${tbl}')">
+      <div class="tp-title">${tableLabel[tbl] || tbl} <span style="font-style:italic;font-size:.82rem;color:var(--ink-muted);font-weight:400">(${guests.length} ${guests.length > 1 ? t('guestPlural') : t('guestSingular')})</span></div>
       ${guests.map((g,i) =>
         `<div class="tp-guest">
           <span class="tp-num">${i+1}</span>
