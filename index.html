@@ -338,6 +338,51 @@ header .guest-count{
   font-style:italic;font-size:.85rem;color:var(--sage-dark);letter-spacing:.03em
 }
 
+/* ── Mini Floor Plan ── */
+.mini-floorplan{
+  margin-top:1.25rem;padding:.75rem;background:var(--white);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  border:1px solid var(--sage-light);animation:fadeIn .4s ease
+}
+.mini-floorplan .mfp-title{
+  font-family:'Playfair Display',serif;font-weight:600;
+  font-size:.95rem;color:var(--sage-dark);margin-bottom:.5rem;text-align:center
+}
+.mini-floorplan .mfp-container{
+  display:flex;border:1.5px solid #2C2C2C;border-radius:6px;
+  overflow:hidden;background:#FDF7ED;height:140px
+}
+.mini-floorplan .mfp-stage{
+  width:30px;min-width:30px;
+  background:linear-gradient(180deg,#66C2A5,#4DAF91);
+  color:#fff;font-size:8px;font-weight:600;letter-spacing:.1em;
+  display:flex;align-items:center;justify-content:center;
+  writing-mode:vertical-rl;text-orientation:mixed;border-right:1.5px solid #2C2C2C
+}
+.mini-floorplan .mfp-seating{
+  flex:1;position:relative;padding:8px 4px;
+  display:flex;flex-direction:column;justify-content:space-around
+}
+.mfp-row{
+  display:flex;justify-content:center;align-items:center;gap:6px
+}
+.mfp-dot{
+  width:16px;height:16px;border-radius:50%;border:1.5px solid #2C2C2C;
+  background:#FFFAF3;flex-shrink:0;position:relative
+}
+.mfp-dot.highlight{
+  background:linear-gradient(135deg,#66C2A5,#4DAF91);
+  border-color:#4DAF91;box-shadow:0 0 6px rgba(77,175,145,.5)
+}
+.mfp-dot.vip-dot{width:18px;height:18px}
+.mfp-dot.highlight.vip-dot{width:18px;height:18px}
+.mini-floorplan .mfp-click{
+  text-align:center;margin-top:.4rem;
+  font-size:.8rem;color:var(--sage);font-style:italic;cursor:pointer;
+  transition:color .2s
+}
+.mini-floorplan .mfp-click:hover{color:var(--sage-dark)}
+
 /* ── Animations ── */
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -379,6 +424,10 @@ footer{
   .modal{animation:slideUpMobile .3s ease}
   .round-table .table-label .tile-name{font-size:1.1rem}
   .round-table .table-label .tile-cap{font-size:.8rem}
+  .mini-floorplan .mfp-container{height:110px}
+  .mfp-dot{width:14px;height:14px}
+  .mfp-dot.vip-dot,.mfp-dot.highlight.vip-dot{width:16px;height:16px}
+  .mfp-row{gap:5px}
 }
 
 @media(max-width:380px){
@@ -462,6 +511,16 @@ footer{
 
   <div id="resultsArea"></div>
   <div id="genericTip"></div>
+
+  <!-- ═══ Mini Floor Plan ═══ -->
+  <div id="miniFloorplan" class="mini-floorplan" style="display:none">
+    <div class="mfp-title" id="mfpTitle">🗺️ Your Table</div>
+    <div class="mfp-container" id="mfpContainer">
+      <div class="mfp-stage">STAGE</div>
+      <div class="mfp-seating" id="mfpSeating"></div>
+    </div>
+    <div class="mfp-click" onclick="window.open('floorplan.html','_blank')">Tap to enlarge →</div>
+  </div>
 </div>
 
 <!-- ═══ TABLE MODAL ═══ -->
@@ -526,6 +585,12 @@ const guestData = [
 
 /* ── Table definitions ── */
 const tableOrder = ["VIP","一萬","二萬","三萬","四萬","五萬","六萬","七萬","八萬","九萬","发财","白板","红中"];
+
+/* ── Floor plan layout: [row1, row2] — maps table name to position ── */
+const floorplanRows = [
+  ["VIP","一萬","三萬","五萬","七萬","九萬","发财"],
+  ["二萬","四萬","六萬","八萬","白板","红中"]
+];
 
 /* ── Table display names ── */
 const tableLabel = {
@@ -735,6 +800,7 @@ function showInitial() {
   initialState.style.display = 'block';
   resultsArea.innerHTML = '';
   clearGenericTip();
+  document.getElementById('miniFloorplan').style.display = 'none';
 }
 
 function showNoResults(query) {
@@ -800,6 +866,34 @@ function showResults(matches, query) {
   }).join('');
 
   resultsArea.innerHTML = cardsHtml + previews;
+
+  // Show mini floor plan highlighting the first matched table
+  if (tables.length > 0) {
+    renderMiniFloorplan(tables[0]);
+  }
+}
+
+/* ── Mini floor plan ── */
+function renderMiniFloorplan(tableName) {
+  const el = document.getElementById('miniFloorplan');
+  const seat = document.getElementById('mfpSeating');
+  el.style.display = 'block';
+  document.getElementById('mfpTitle').textContent = `🗺️ Your Table — ${tableLabel[tableName] || tableName}`;
+
+  let html = '';
+  floorplanRows.forEach(row => {
+    html += '<div class="mfp-row">';
+    row.forEach(tbl => {
+      const isVip = tbl === 'VIP';
+      const isMatch = tbl === tableName;
+      let cls = 'mfp-dot';
+      if (isVip) cls += ' vip-dot';
+      if (isMatch) cls += ' highlight';
+      html += `<div class="${cls}" title="${tableLabel[tbl] || tbl}"></div>`;
+    });
+    html += '</div>';
+  });
+  seat.innerHTML = html;
 }
 
 /* ── Helpers ── */
