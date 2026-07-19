@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>💍 Seating Chart — Roger &amp; Noelle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -45,29 +45,61 @@ body{
 header{
   background:linear-gradient(135deg,var(--sage)0%,var(--sage-dark)100%);
   color:var(--white);text-align:center;
-  padding:2.5rem 1.25rem 2rem;position:relative;overflow:hidden
+  padding:1.75rem 1.25rem 1.25rem;position:relative;overflow:hidden
 }
 header::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:6px;
   background:linear-gradient(90deg,var(--gold-light),var(--gold),var(--champagne),var(--gold),var(--gold-light));
   opacity:.6
 }
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;max-width:720px;margin:0 auto}
 header h1{
   font-family:'Playfair Display',serif;
-  font-weight:600;font-size:2rem;letter-spacing:.06em;margin-bottom:.25rem
+  font-weight:600;font-size:1.8rem;letter-spacing:.06em;margin-bottom:.15rem
 }
 header .subtitle{
   font-family:'Playfair Display',serif;
-  font-style:italic;font-weight:400;font-size:1.05rem;opacity:.85;letter-spacing:.04em
+  font-style:italic;font-weight:400;font-size:.95rem;opacity:.85;letter-spacing:.04em
 }
 header .couple{
-  font-size:1.1rem;margin-top:.5rem;opacity:.9;letter-spacing:.08em
+  font-size:1.05rem;margin-top:.4rem;opacity:.9;letter-spacing:.08em
 }
 header .guest-count{
-  display:inline-block;margin-top:.75rem;padding:.3rem 1.25rem;
+  display:inline-block;margin-top:.6rem;padding:.25rem 1.1rem;
   background:rgba(255,255,255,.15);border-radius:20px;
-  font-size:.9rem;font-style:italic;letter-spacing:.04em
+  font-size:.85rem;font-style:italic;letter-spacing:.04em
 }
+
+/* ── Language toggle ── */
+.lang-toggle{
+  display:flex;gap:2px;background:rgba(255,255,255,.12);border-radius:6px;padding:2px;flex-shrink:0
+}
+.lang-btn{
+  background:transparent;border:none;color:rgba(255,255,255,.5);font-family:'Noto Sans SC',sans-serif;
+  font-size:.72rem;font-weight:500;padding:4px 10px;border-radius:4px;cursor:pointer;transition:all .2s;letter-spacing:.03em
+}
+.lang-btn.active{background:rgba(255,255,255,.85);color:var(--sage-dark);font-weight:600}
+
+/* ── Venue banner ── */
+.venue-banner{
+  background:var(--cream);border-bottom:1px solid var(--champagne-dark);
+  padding:.65rem 1rem;text-align:center
+}
+.venue-banner .venue-name{font-weight:600;color:var(--sage-dark);font-size:.95rem;letter-spacing:.03em}
+.venue-banner .venue-line{font-size:.8rem;color:var(--ink-soft);margin-top:2px}
+.venue-banner .venue-line span{margin:0 .4rem;opacity:.4}
+
+/* ── Countdown ── */
+.countdown-bar{
+  background:var(--sage-mist);padding:.5rem 1rem;text-align:center;border-bottom:1px solid var(--sage-light)
+}
+.countdown-bar .cd-label{font-size:.78rem;color:var(--ink-muted);font-style:italic;letter-spacing:.04em}
+.countdown-bar .cd-digits{
+  font-family:'Playfair Display',serif;font-weight:600;font-size:.95rem;color:var(--sage-dark);letter-spacing:.06em;
+  margin-top:1px
+}
+.countdown-bar .cd-digits .cd-num{display:inline-block;min-width:1.8em}
+.countdown-bar .cd-digits .cd-sep{opacity:.4;margin:0 2px}
 
 /* ── Search ── */
 .search-section{
@@ -111,18 +143,60 @@ header .guest-count{
 .generic-tip .tip-sub{font-style:italic;font-size:.9rem;color:var(--ink-muted)}
 
 /* ── Container ── */
-.container{max-width:720px;margin:1.5rem auto;padding:0 1.25rem 3rem}
+.container{max-width:720px;margin:1.25rem auto;padding:0 1.25rem 3rem}
 
 /* ── Initial state ── */
 .initial-state{
-  text-align:center;padding:3rem 1rem 2rem;animation:fadeIn .5s ease
+  text-align:center;padding:2.5rem 1rem 1.5rem;animation:fadeIn .5s ease
 }
-.initial-state .deco-icon{font-size:3rem;margin-bottom:1rem;opacity:.6}
+.initial-state .deco-icon{font-size:2.5rem;margin-bottom:.75rem;opacity:.6}
 .initial-state h2{
   font-family:'Playfair Display',serif;font-weight:500;
-  font-size:1.4rem;color:var(--ink-soft);margin-bottom:.5rem
+  font-size:1.3rem;color:var(--ink-soft);margin-bottom:.35rem
 }
-.initial-state p{color:var(--ink-muted);font-style:italic;font-size:1rem}
+.initial-state p{color:var(--ink-muted);font-style:italic;font-size:.95rem}
+
+/* ── View All Tables button ── */
+.view-all-btn-wrap{text-align:center;margin:1rem 0 .5rem}
+.view-all-btn{
+  background:var(--white);border:1.5px solid var(--sage-light);color:var(--sage-dark);
+  font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.05em;
+  padding:.6rem 2rem;border-radius:25px;cursor:pointer;transition:all .25s;
+  box-shadow:var(--shadow)
+}
+.view-all-btn:hover{background:var(--sage-mist);border-color:var(--sage)}
+.view-all-btn:active{transform:scale(.97)}
+
+/* ── All Tables view ── */
+.all-tables-view{display:none;animation:fadeIn .35s ease;margin-top:.5rem}
+.all-tables-view.open{display:block}
+.all-tables-list{display:flex;flex-direction:column;gap:.4rem}
+.all-tables-group{
+  background:var(--white);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);border:1px solid var(--champagne)
+}
+.all-tables-header{
+  background:linear-gradient(135deg,var(--sage-mist),var(--champagne-light));
+  padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;transition:background .2s;user-select:none
+}
+.all-tables-header:hover{background:var(--sage-mist)}
+.all-tables-header .at-label{font-weight:600;font-size:1.05rem;color:var(--sage-dark);letter-spacing:.04em}
+.all-tables-header .at-count{font-size:.8rem;color:var(--ink-muted);font-style:italic}
+.all-tables-header .at-arrow{font-size:.75rem;color:var(--ink-muted);transition:transform .25s}
+.all-tables-header.open .at-arrow{transform:rotate(180deg)}
+.all-tables-body{display:none;padding:.5rem 1rem .75rem}
+.all-tables-body.open{display:block}
+.all-tables-guest{
+  display:flex;align-items:center;gap:.6rem;padding:.35rem 0;
+  font-size:.95rem;border-bottom:1px solid var(--champagne)
+}
+.all-tables-guest:last-child{border-bottom:none}
+.all-tables-guest .at-num{
+  width:22px;height:22px;border-radius:50%;background:var(--sage-mist);
+  color:var(--sage-dark);display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:600;flex-shrink:0
+}
 
 /* ── Guest list ── */
 .guest-list{
@@ -130,8 +204,8 @@ header .guest-count{
 }
 .guest-card{
   background:var(--white);border-radius:var(--radius);
-  box-shadow:var(--shadow);padding:1rem 1.25rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  box-shadow:var(--shadow);padding:.85rem 1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:.75rem;
   transition:transform .2s,box-shadow .2s,border-color .2s;
   border:1px solid transparent
 }
@@ -142,37 +216,64 @@ header .guest-count{
 }
 .guest-card:active{transform:translateY(0)}
 .guest-card .guest-name{
-  font-size:1.15rem;font-weight:600;color:var(--ink);letter-spacing:.02em
+  font-size:1.1rem;font-weight:600;color:var(--ink);letter-spacing:.02em;
+  display:flex;align-items:center;gap:.35rem;flex-wrap:wrap
 }
 .guest-card .table-badge{
   display:inline-flex;align-items:center;gap:.35rem;
-  padding:.3rem .75rem;border-radius:20px;
+  padding:.25rem .65rem;border-radius:20px;
   background:var(--sage-mist);color:var(--sage-dark);
-  font-size:.85rem;font-weight:500;letter-spacing:.04em;white-space:nowrap;flex-shrink:0
+  font-size:.82rem;font-weight:500;letter-spacing:.04em;white-space:nowrap;flex-shrink:0
 }
+
+/* ── Table preview (inline, below search results) ── */
+.table-preview{
+  background:var(--champagne-light);border:1px solid var(--gold-light);
+  border-radius:var(--radius);padding:.85rem 1rem;margin-top:.4rem;animation:fadeIn .3s ease
+}
+.table-preview .tp-title{
+  font-family:'Playfair Display',serif;font-weight:600;font-size:1rem;
+  color:var(--sage-dark);margin-bottom:.35rem;display:flex;align-items:center;gap:.5rem
+}
+.table-preview .tp-guest{
+  display:flex;align-items:center;gap:.5rem;padding:.2rem 0;
+  font-size:.92rem;border-bottom:1px solid rgba(196,169,98,.2)
+}
+.table-preview .tp-guest:last-child{border-bottom:none}
+.table-preview .tp-num{
+  width:20px;height:20px;border-radius:50%;background:var(--sage-mist);
+  color:var(--sage-dark);display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:600;flex-shrink:0
+}
+.table-preview .tp-click{
+  margin-top:.5rem;text-align:right;font-size:.8rem;color:var(--sage);
+  cursor:pointer;font-style:italic;transition:color .2s
+}
+.table-preview .tp-click:hover{color:var(--sage-dark)}
 
 /* ── No results ── */
 .no-results{
-  text-align:center;padding:3rem 1rem;animation:fadeIn .4s ease
+  text-align:center;padding:2.5rem 1rem;animation:fadeIn .4s ease
 }
 .no-results .sad-icon{font-size:2.5rem;margin-bottom:1rem;opacity:.5}
 .no-results h3{
   font-family:'Playfair Display',serif;font-weight:500;
-  color:var(--ink-soft);margin-bottom:.5rem;font-size:1.3rem
+  color:var(--ink-soft);margin-bottom:.5rem;font-size:1.2rem
 }
-.no-results p{color:var(--ink-muted);font-size:1rem;margin-bottom:.3rem}
-.no-results .tips{margin-top:1rem;font-size:.9rem;color:var(--ink-muted);line-height:1.8}
+.no-results p{color:var(--ink-muted);font-size:.95rem;margin-bottom:.3rem}
+.no-results .tips{margin-top:.75rem;font-size:.85rem;color:var(--ink-muted);line-height:1.8}
 
 /* ── Modal ── */
 .modal-overlay{
   display:none;position:fixed;inset:0;
   background:rgba(44,44,44,.5);backdrop-filter:blur(4px);
-  z-index:1000;animation:fadeIn .25s ease;overflow-y:auto;padding:1.25rem
+  z-index:1000;animation:fadeIn .25s ease;overflow-y:auto;padding:1rem;
+  align-items:center;justify-content:center
 }
-.modal-overlay.active{display:flex;align-items:flex-start;justify-content:center;padding-top:3rem}
+.modal-overlay.active{display:flex}
 .modal{
   background:var(--white);border-radius:var(--radius);
-  max-width:540px;width:100%;
+  max-width:540px;width:100%;margin:auto;
   box-shadow:0 12px 48px rgba(44,44,44,.18);
   animation:slideUp .35s ease;overflow:hidden
 }
@@ -190,15 +291,15 @@ header .guest-count{
 .modal-header .close-btn:hover{background:rgba(255,255,255,.3)}
 .modal-header h2{
   font-family:'Playfair Display',serif;font-weight:600;
-  font-size:1.5rem;letter-spacing:.04em
+  font-size:1.4rem;letter-spacing:.04em;padding-right:1rem
 }
 .modal-header .table-subtitle{
-  font-size:.95rem;opacity:.8;margin-top:.2rem;font-style:italic
+  font-size:.9rem;opacity:.8;margin-top:.2rem;font-style:italic
 }
 .modal-body{padding:1.25rem 1.5rem 1.5rem}
 
 /* ── Round table ── */
-.table-visual{display:flex;justify-content:center;margin-bottom:1.5rem}
+.table-visual{display:flex;justify-content:center;margin-bottom:1.25rem}
 .round-table{
   position:relative;width:220px;height:220px;border-radius:50%;
   background:radial-gradient(circle at 40% 35%,var(--champagne-light),var(--champagne)60%,var(--champagne-dark)100%);
@@ -220,7 +321,7 @@ header .guest-count{
 .table-guest-list{display:flex;flex-direction:column;gap:.3rem}
 .table-guest-item{
   display:flex;align-items:center;gap:.75rem;
-  padding:.6rem 0;border-bottom:1px solid var(--champagne);
+  padding:.55rem 0;border-bottom:1px solid var(--champagne);
   font-size:1rem
 }
 .table-guest-item:last-child{border-bottom:none}
@@ -232,9 +333,9 @@ header .guest-count{
 }
 .table-guest-item .guest-name{color:var(--ink);font-weight:500}
 .table-count{
-  margin-top:1rem;padding:.75rem;background:var(--sage-mist);
+  margin-top:.75rem;padding:.65rem;background:var(--sage-mist);
   border-radius:var(--radius-sm);text-align:center;
-  font-style:italic;font-size:.9rem;color:var(--sage-dark);letter-spacing:.03em
+  font-style:italic;font-size:.85rem;color:var(--sage-dark);letter-spacing:.03em
 }
 
 /* ── Animations ── */
@@ -248,27 +349,87 @@ footer{
   letter-spacing:.03em;opacity:.6
 }
 
+/* ══════════════════════════════════════════
+   MOBILE — all viewports
+   ══════════════════════════════════════════ */
 @media(max-width:480px){
-  header{padding:2rem 1rem 1.5rem}
-  header h1{font-size:1.6rem}
-  .search-section{padding:0 1rem}
-  .container{padding:1rem 1rem 2rem}
-  .guest-card{padding:.85rem 1rem}
-  .round-table{width:180px;height:180px}
-  .modal-header{padding:1.25rem 1.25rem 1rem}
-  .modal-body{padding:1rem 1.25rem 1.25rem}
+  header{padding:1.25rem .85rem 1rem}
+  header h1{font-size:1.4rem}
+  header .subtitle{font-size:.82rem}
+  header .couple{font-size:.92rem}
+  .lang-btn{font-size:.65rem;padding:3px 8px}
+  .venue-banner{padding:.5rem .75rem}
+  .venue-banner .venue-name{font-size:.85rem}
+  .venue-banner .venue-line{font-size:.72rem}
+  .countdown-bar{padding:.4rem .75rem}
+  .countdown-bar .cd-label{font-size:.7rem}
+  .countdown-bar .cd-digits{font-size:.82rem}
+  .search-section{padding:0 .85rem}
+  .container{padding:.75rem .85rem 2rem}
+  .guest-card{padding:.75rem .85rem}
+  .guest-card .guest-name{font-size:1rem}
+  .round-table{width:170px;height:170px}
+  .modal-header{padding:1.1rem 1.1rem 1rem}
+  .modal-body{padding:.85rem 1rem 1rem}
+  .modal{max-width:95vw}
+  .all-tables-header{padding:.55rem .85rem}
+  .all-tables-body{padding:.4rem .85rem .6rem}
+  .table-preview{padding:.65rem .85rem}
+  /* Fix modal scrolling on small screens */
+  .modal-overlay{padding:.5rem;align-items:flex-start;padding-top:1rem}
+  .modal{animation:slideUpMobile .3s ease}
+  .round-table .table-label .tile-name{font-size:1.1rem}
+  .round-table .table-label .tile-cap{font-size:.7rem}
+}
+
+@media(max-width:380px){
+  .round-table{width:150px;height:150px}
+  header h1{font-size:1.2rem}
+  .guest-card .guest-name{font-size:.92rem}
+  .guest-card .table-badge{font-size:.75rem;padding:.2rem .5rem}
+}
+
+@keyframes slideUpMobile{
+  from{opacity:0;transform:translateY(10px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
 </style>
 </head>
 <body>
 
+<!-- ═══ HEADER ═══ -->
 <header>
-  <h1>💍 座位表</h1>
-  <div class="subtitle">— Seating Chart —</div>
-  <div class="couple">Roger &amp; Noelle</div>
+  <div class="header-top">
+    <div></div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+  <h1 id="headTitle">💍 Seating Chart</h1>
+  <div class="subtitle" id="headSub">— Seating Chart —</div>
+  <div class="couple">Roger Tan &amp; Noelle</div>
   <div class="guest-count" id="guestCount">135 guests · 13 tables</div>
 </header>
 
+<!-- ═══ VENUE ═══ -->
+<div class="venue-banner">
+  <div class="venue-name">📍 JEN Singapore Tanglin by Shangri-La</div>
+  <div class="venue-line">1A Cuscaden Road, Singapore 249716 <span>·</span> Orchard Boulevard MRT (TE13) Exit 1</div>
+</div>
+
+<!-- ═══ COUNTDOWN ═══ -->
+<div class="countdown-bar">
+  <div class="cd-label" id="cdLabel">Counting down to the big day…</div>
+  <div class="cd-digits" id="cdDigits">
+    <span class="cd-num" id="cdDays">--</span><span class="cd-sep">d</span>
+    <span class="cd-num" id="cdHours">--</span><span class="cd-sep">h</span>
+    <span class="cd-num" id="cdMins">--</span><span class="cd-sep">m</span>
+    <span class="cd-num" id="cdSecs">--</span><span class="cd-sep">s</span>
+  </div>
+</div>
+
+<!-- ═══ SEARCH ═══ -->
 <div class="search-section">
   <div class="search-wrapper">
     <span class="icon">🔍</span>
@@ -278,15 +439,28 @@ footer{
 </div>
 
 <div class="container" id="appContainer">
+  <!-- ═══ View All Tables button ═══ -->
+  <div class="view-all-btn-wrap">
+    <button class="view-all-btn" id="viewAllBtn" onclick="toggleAllTables()">📋 View All Tables</button>
+  </div>
+
+  <!-- ═══ All Tables view ═══ -->
+  <div class="all-tables-view" id="allTablesView">
+    <div class="all-tables-list" id="allTablesList"></div>
+  </div>
+
+  <!-- ═══ Initial state ═══ -->
   <div class="initial-state" id="initialState">
     <div class="deco-icon">🌿</div>
-    <h2>Find Your Table</h2>
-    <p>Type a name above to locate your seat</p>
+    <h2 id="initTitle">Find Your Table</h2>
+    <p id="initSub">Type a name above to locate your seat</p>
   </div>
+
   <div id="resultsArea"></div>
   <div id="genericTip"></div>
 </div>
 
+<!-- ═══ TABLE MODAL ═══ -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-header">
@@ -309,32 +483,47 @@ footer{
   </div>
 </div>
 
-<footer>❤️ 百年好合 · Roger &amp; Noelle</footer>
+<footer>❤️ 百年好合 · Roger Tan &amp; Noelle</footer>
 
 <script>
-/* ══════════════════════════════════════════
-   GUEST DATA — embed exactly as provided
-   ══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   CONFIG
+   ═══════════════════════════════════════════════════════ */
+
+// ★ SET YOUR WEDDING DATE HERE ★
+const WEDDING_DATE = new Date("2026-09-18T19:00:00+08:00");
+
+const VENUE = {
+  cn: "JEN Singapore Tanglin by Shangri-La",
+  addr: "1A Cuscaden Road, Singapore 249716",
+  mrt: "Orchard Boulevard MRT (TE13) Exit 1"
+};
+
+/* ═══════════════════════════════════════════════════════
+   GUEST DATA
+   ═══════════════════════════════════════════════════════ */
+
+// diet: "" (none) or "veg" (vegetarian → shows 🥗)
 const guestData = [
-  {name:"Noelle's Grandma",table:"VIP"},{name:"Noelle's Dad",table:"VIP"},{name:"Noelle's Mother",table:"VIP"},{name:"Er Su",table:"VIP"},{name:"Er Shen",table:"VIP"},{name:"Noelle",table:"VIP"},{name:"Roger",table:"VIP"},{name:"Agnes",table:"VIP"},{name:"Tan Kim San",table:"VIP"},{name:"Roy Tan",table:"VIP"},{name:"Lynette Tan",table:"VIP"},{name:"Ryan",table:"VIP"},
-  {name:"Xiao Gu's MIL",table:"一萬"},{name:"Da Gu",table:"一萬"},{name:"Da Gu Zhang",table:"一萬"},{name:"Xiao Gu",table:"一萬"},{name:"Xiao Gu's Husband",table:"一萬"},{name:"Angelia",table:"一萬"},{name:"Thomas",table:"一萬"},{name:"Da ge",table:"一萬"},{name:"Da Sai",table:"一萬"},{name:"Thrid Aunt",table:"一萬"},
-  {name:"Kaishun",table:"二萬"},{name:"Xin Yi",table:"二萬"},{name:"Xin Le",table:"二萬"},{name:"Eeying",table:"二萬"},{name:"Eeying +1",table:"二萬"},{name:"Ee wei",table:"二萬"},{name:"Ee Wei +1",table:"二萬"},{name:"Ng Yin Lin",table:"二萬"},{name:"Michael",table:"二萬"},{name:"Er Gu",table:"二萬"},
-  {name:"Jia Ming",table:"三萬"},{name:"Hui Lin",table:"三萬"},{name:"Hui Lin's Mother",table:"三萬"},{name:"Hui Qi",table:"三萬"},{name:"Carrie",table:"三萬"},{name:"Noelle's Brother",table:"三萬"},{name:"Noelle's Sister In Law",table:"三萬"},{name:"Ee ming",table:"三萬"},{name:"Tee Kai Meng",table:"三萬"},{name:"Kai Xiang",table:"三萬"},{name:"Jing yee",table:"三萬"},
-  {name:"Shee Hui",table:"四萬"},{name:"Chock",table:"四萬"},{name:"Chock + 1",table:"四萬"},{name:"Heng Jie",table:"四萬"},{name:"Ang",table:"四萬"},{name:"Shikin",table:"四萬"},{name:"Shikin + 1",table:"四萬"},{name:"Fangzi",table:"四萬"},{name:"Brandon",table:"四萬"},{name:"Tina",table:"四萬"},{name:"Vishal",table:"四萬"},{name:"Yoon Jung",table:"四萬"},
-  {name:"Wu You",table:"五萬"},{name:"Phyu",table:"五萬"},{name:"Christine",table:"五萬"},{name:"Pei Fang",table:"五萬"},{name:"Deon",table:"五萬"},{name:"Laura",table:"五萬"},{name:"Nicole",table:"五萬"},{name:"Cayden Chow",table:"五萬"},{name:"Meijie",table:"五萬"},{name:"HuiChing",table:"五萬"},
-  {name:"Lao yi",table:"六萬"},{name:"Lao yi Zhang",table:"六萬"},{name:"Wen Chong",table:"六萬"},{name:"Li Xia",table:"六萬"},{name:"Lao Yi",table:"六萬"},{name:"Lao Yi Zhang",table:"六萬"},{name:"Teo Chwee",table:"六萬"},{name:"Ai Ping / Asyuru",table:"六萬"},{name:"Kevin",table:"六萬"},{name:"Ang Kiat",table:"六萬"},
-  {name:"Tan Kim Hock",table:"七萬"},{name:"Tan Kim Hock's Wife",table:"七萬"},{name:"Tan Kim Hock Ah Sang",table:"七萬"},{name:"Tan Kim Hua & family",table:"七萬"},{name:"Tan Kim Hua's Wife",table:"七萬"},{name:"Tan Kim Hua's Jean",table:"七萬"},{name:"Tan Kim Hua's Partner",table:"七萬"},{name:"Tan Kim Hua's Joseph",table:"七萬"},{name:"Tan Kim Hua's youngest",table:"七萬"},{name:"Tan Kim Huay",table:"七萬"},
-  {name:"Low Pek Ngoh",table:"八萬"},{name:"Joey",table:"八萬"},{name:"Joey's Clarence",table:"八萬"},{name:"Lim Choo Thai",table:"八萬"},{name:"Wilson",table:"八萬"},{name:"Susanna",table:"八萬"},{name:"Eric",table:"八萬"},{name:"Jolyee",table:"八萬"},{name:"Jennifer",table:"八萬"},{name:"Ricky",table:"八萬"},
-  {name:"Gary",table:"九萬"},{name:"Dickson",table:"九萬"},{name:"Jade",table:"九萬"},{name:"Vivienne",table:"九萬"},{name:"Chong",table:"九萬"},{name:"David Koh",table:"九萬"},{name:"Patricia Sim",table:"九萬"},{name:"Aaron Wong",table:"九萬"},{name:"Jennifer",table:"九萬"},{name:"Simon",table:"九萬"},
-  {name:"Herman's Mum",table:"发财"},{name:"Herman",table:"发财"},{name:"Bella",table:"发财"},{name:"Chuan Sheng",table:"发财"},{name:"Shawn",table:"发财"},{name:"Jun Jie",table:"发财"},{name:"Jun Jie+1",table:"发财"},{name:"Teo Chwee's children",table:"发财"},{name:"Teo Chwee's children 2",table:"发财"},{name:"Teo Chwee's children 3",table:"发财"},
-  {name:"Peter",table:"白板"},{name:"Madgeline",table:"白板"},{name:"Morgan",table:"白板"},{name:"Adeline",table:"白板"},{name:"Theodoric Tay",table:"白板"},{name:"Stephane",table:"白板"},{name:"Javen Tan",table:"白板"},{name:"Seah Ai Keok",table:"白板"},{name:"Jennifer Sia",table:"白板"},{name:"Sally Chee",table:"白板"},
-  {name:"Mok",table:"红中"},{name:"Mama",table:"红中"},{name:"Faizi",table:"红中"},{name:"Sharon",table:"红中"},{name:"Sharon Mother",table:"红中"},{name:"Ramy",table:"红中"},{name:"Fanny / Aiysah",table:"红中"},{name:"Hudhayfah Umar",table:"红中"},{name:"Wani",table:"红中"},{name:"Yanto",table:"红中"}
+  {name:"Noelle's Grandma",table:"VIP",diet:""},{name:"Noelle's Dad",table:"VIP",diet:""},{name:"Noelle's Mother",table:"VIP",diet:""},{name:"Er Su",table:"VIP",diet:""},{name:"Er Shen",table:"VIP",diet:""},{name:"Noelle",table:"VIP",diet:""},{name:"Roger Tan",table:"VIP",diet:""},{name:"Agnes",table:"VIP",diet:""},{name:"Tan Kim San",table:"VIP",diet:""},{name:"Roy Tan",table:"VIP",diet:""},{name:"Lynette Tan",table:"VIP",diet:""},{name:"Ryan",table:"VIP",diet:""},
+  {name:"Xiao Gu's MIL",table:"一萬",diet:""},{name:"Da Gu",table:"一萬",diet:""},{name:"Da Gu Zhang",table:"一萬",diet:""},{name:"Xiao Gu",table:"一萬",diet:""},{name:"Xiao Gu's Husband",table:"一萬",diet:""},{name:"Angelia",table:"一萬",diet:""},{name:"Thomas",table:"一萬",diet:""},{name:"Da ge",table:"一萬",diet:""},{name:"Da Sai",table:"一萬",diet:""},{name:"Thrid Aunt",table:"一萬",diet:""},
+  {name:"Kaishun",table:"二萬",diet:""},{name:"Xin Yi",table:"二萬",diet:""},{name:"Xin Le",table:"二萬",diet:""},{name:"Eeying",table:"二萬",diet:""},{name:"Eeying +1",table:"二萬",diet:""},{name:"Ee wei",table:"二萬",diet:""},{name:"Ee Wei +1",table:"二萬",diet:""},{name:"Ng Yin Lin",table:"二萬",diet:""},{name:"Michael",table:"二萬",diet:""},{name:"Er Gu",table:"二萬",diet:""},
+  {name:"Jia Ming",table:"三萬",diet:""},{name:"Hui Lin",table:"三萬",diet:""},{name:"Hui Lin's Mother",table:"三萬",diet:""},{name:"Hui Qi",table:"三萬",diet:""},{name:"Carrie",table:"三萬",diet:""},{name:"Noelle's Brother",table:"三萬",diet:""},{name:"Noelle's Sister In Law",table:"三萬",diet:""},{name:"Ee ming",table:"三萬",diet:""},{name:"Tee Kai Meng",table:"三萬",diet:""},{name:"Kai Xiang",table:"三萬",diet:""},{name:"Jing yee",table:"三萬",diet:""},
+  {name:"Shee Hui",table:"四萬",diet:""},{name:"Chock",table:"四萬",diet:""},{name:"Chock + 1",table:"四萬",diet:""},{name:"Heng Jie",table:"四萬",diet:""},{name:"Ang",table:"四萬",diet:""},{name:"Shikin",table:"四萬",diet:""},{name:"Shikin + 1",table:"四萬",diet:""},{name:"Fangzi",table:"四萬",diet:""},{name:"Brandon",table:"四萬",diet:""},{name:"Tina",table:"四萬",diet:""},{name:"Vishal",table:"四萬",diet:""},{name:"Yoon Jung",table:"四萬",diet:""},
+  {name:"Wu You",table:"五萬",diet:""},{name:"Phyu",table:"五萬",diet:""},{name:"Christine",table:"五萬",diet:""},{name:"Pei Fang",table:"五萬",diet:""},{name:"Deon",table:"五萬",diet:""},{name:"Laura",table:"五萬",diet:""},{name:"Nicole",table:"五萬",diet:""},{name:"Cayden Chow",table:"五萬",diet:""},{name:"Meijie",table:"五萬",diet:""},{name:"HuiChing",table:"五萬",diet:""},
+  {name:"Lao yi",table:"六萬",diet:""},{name:"Lao yi Zhang",table:"六萬",diet:""},{name:"Wen Chong",table:"六萬",diet:""},{name:"Li Xia",table:"六萬",diet:""},{name:"Lao Yi",table:"六萬",diet:""},{name:"Lao Yi Zhang",table:"六萬",diet:""},{name:"Teo Chwee",table:"六萬",diet:""},{name:"Ai Ping / Asyuru",table:"六萬",diet:""},{name:"Kevin",table:"六萬",diet:""},{name:"Ang Kiat",table:"六萬",diet:""},
+  {name:"Tan Kim Hock",table:"七萬",diet:""},{name:"Tan Kim Hock's Wife",table:"七萬",diet:""},{name:"Tan Kim Hock Ah Sang",table:"七萬",diet:""},{name:"Tan Kim Hua & family",table:"七萬",diet:""},{name:"Tan Kim Hua's Wife",table:"七萬",diet:""},{name:"Tan Kim Hua's Jean",table:"七萬",diet:""},{name:"Tan Kim Hua's Partner",table:"七萬",diet:""},{name:"Tan Kim Hua's Joseph",table:"七萬",diet:""},{name:"Tan Kim Hua's youngest",table:"七萬",diet:""},{name:"Tan Kim Huay",table:"七萬",diet:""},
+  {name:"Low Pek Ngoh",table:"八萬",diet:""},{name:"Joey",table:"八萬",diet:""},{name:"Joey's Clarence",table:"八萬",diet:""},{name:"Lim Choo Thai",table:"八萬",diet:""},{name:"Wilson",table:"八萬",diet:""},{name:"Susanna",table:"八萬",diet:""},{name:"Eric",table:"八萬",diet:""},{name:"Jolyee",table:"八萬",diet:""},{name:"Jennifer",table:"八萬",diet:""},{name:"Ricky",table:"八萬",diet:""},
+  {name:"Gary",table:"九萬",diet:""},{name:"Dickson",table:"九萬",diet:""},{name:"Jade",table:"九萬",diet:""},{name:"Vivienne",table:"九萬",diet:""},{name:"Chong",table:"九萬",diet:""},{name:"David Koh",table:"九萬",diet:""},{name:"Patricia Sim",table:"九萬",diet:""},{name:"Aaron Wong",table:"九萬",diet:""},{name:"Jennifer",table:"九萬",diet:""},{name:"Simon",table:"九萬",diet:""},
+  {name:"Herman's Mum",table:"发财",diet:""},{name:"Herman",table:"发财",diet:""},{name:"Bella",table:"发财",diet:""},{name:"Chuan Sheng",table:"发财",diet:""},{name:"Shawn",table:"发财",diet:""},{name:"Jun Jie",table:"发财",diet:""},{name:"Jun Jie+1",table:"发财",diet:""},{name:"Teo Chwee's children",table:"发财",diet:""},{name:"Teo Chwee's children 2",table:"发财",diet:""},{name:"Teo Chwee's children 3",table:"发财",diet:""},
+  {name:"Peter",table:"白板",diet:""},{name:"Madgeline",table:"白板",diet:""},{name:"Morgan",table:"白板",diet:""},{name:"Adeline",table:"白板",diet:""},{name:"Theodoric Tay",table:"白板",diet:""},{name:"Stephane",table:"白板",diet:""},{name:"Javen Tan",table:"白板",diet:""},{name:"Seah Ai Keok",table:"白板",diet:""},{name:"Jennifer Sia",table:"白板",diet:""},{name:"Sally Chee",table:"白板",diet:""},
+  {name:"Mok",table:"红中",diet:""},{name:"Mama",table:"红中",diet:""},{name:"Faizi",table:"红中",diet:""},{name:"Sharon",table:"红中",diet:""},{name:"Sharon Mother",table:"红中",diet:""},{name:"Ramy",table:"红中",diet:""},{name:"Fanny / Aiysah",table:"红中",diet:""},{name:"Hudhayfah Umar",table:"红中",diet:""},{name:"Wani",table:"红中",diet:""},{name:"Yanto",table:"红中",diet:""}
 ];
 
 /* ── Table definitions ── */
 const tableOrder = ["VIP","一萬","二萬","三萬","四萬","五萬","六萬","七萬","八萬","九萬","发财","白板","红中"];
 
-/* ── Table display names with emoji ── */
+/* ── Table display names ── */
 const tableLabel = {
   "VIP":  "👑 VIP",
   "一萬": "🀄 一萬","二萬": "🀄 二萬","三萬": "🀄 三萬",
@@ -343,12 +532,114 @@ const tableLabel = {
   "发财": "🀄 发财","白板": "🀄 白板","红中": "🀄 红中"
 };
 
-/* ── Compute table capacities ── */
-function getTableCapacity(t) {
-  return guestData.filter(g => g.table === t).length;
+/* ═══════════════════════════════════════════════════════
+   I18N — translations
+   ═══════════════════════════════════════════════════════ */
+
+let currentLang = 'en';  // default: English
+
+const i18n = {
+  'headTitle':        { en: '💍 Seating Chart',         zh: '💍 座位表' },
+  'headSub':          { en: '— Seating Chart —',        zh: '— 座位表 —' },
+  'searchPlaceholder':{ en: 'Search by name…',          zh: '按姓名搜索…' },
+  'initTitle':        { en: 'Find Your Table',          zh: '查找您的座位' },
+  'initSub':          { en: 'Type a name above to locate your seat', zh: '请输入姓名查找您的座位' },
+  'guestCount':       { en: ` guests · `,               zh: ` 位宾客 · ` },
+  'tables':           { en: ' tables',                   zh: ' 桌' },
+  'guestSingular':    { en: ' guest',                    zh: ' 位宾客' },
+  'guestPlural':      { en: ' guests',                   zh: ' 位宾客' },
+  'seatSingular':     { en: ' seat',                     zh: ' 座' },
+  'seatPlural':       { en: ' seats',                    zh: ' 座' },
+  'atThisTable':      { en: ' at this table',            zh: ' 位于此桌' },
+  'viewAllBtn':       { en: '📋 View All Tables',       zh: '📋 查看所有桌号' },
+  'noResultsTitle':   { en: 'Name not found',            zh: '未找到姓名' },
+  'noResultsMsg':     { en: "We couldn't find \"",       zh: '未找到 "' },
+  'noResultsMsg2':    { en: '" in the guest list.',      zh: '" 在宾客列表中。' },
+  'tipCheck':         { en: 'Check the spelling',        zh: '检查拼写' },
+  'tipFirstName':     { en: 'Try just the first name or surname', zh: '尝试仅输入名或姓' },
+  'tipPlusOne':       { en: 'If the guest was invited as a "+1" or family member,', zh: '如果宾客是"+1"或家属，' },
+  'tipPlusOne2':      { en: 'search for the main invitee\'s name instead', zh: '请搜索主要受邀人的姓名' },
+  'tipAskWP':         { en: 'Ask a member of the wedding party for help', zh: '询问婚礼筹备人员' },
+  'genericTipTitle':  { en: 'Guest matching "',         zh: '匹配 "' },
+  'genericTipMid':    { en: '" may be listed under the ', zh: '" 的宾客可能列在' },
+  'genericTipStrong': { en: 'primary invitee\'s name',  zh: '主要受邀人姓名' },
+  'genericTipSub':    { en: 'Try searching for the person they are accompanying or their family name.', zh: '尝试搜索他们陪同的人或姓氏。' },
+  'cdLabel':          { en: 'Counting down to the big day…', zh: '距离大婚之日还有…' },
+  'cdPast':           { en: '✨ Married! 🎉',            zh: '✨ 已礼成！🎉' },
+  'previewSeeAll':    { en: 'See all guests at this table →', zh: '查看此桌所有宾客 →' },
+  'footer':           { en: '❤️ 百年好合 · Roger Tan & Noelle', zh: '❤️ 百年好合 · Roger Tan & Noelle' },
+  'venueLine':        { en: `${VENUE.addr} · ${VENUE.mrt}`, zh: `${VENUE.addr} · ${VENUE.mrt}` },
+};
+
+function t(key) {
+  return i18n[key]?.[currentLang] ?? i18n[key]?.['en'] ?? key;
 }
 
-/* ── Generic/relational terms that trigger a tooltip ── */
+/* ═══════════════════════════════════════════════════════
+   LANGUAGE SWITCHER
+   ═══════════════════════════════════════════════════════ */
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.documentElement.lang = lang;
+
+  // Update static elements
+  document.getElementById('headTitle').textContent = t('headTitle');
+  document.getElementById('headSub').textContent = t('headSub');
+  document.getElementById('searchInput').placeholder = t('searchPlaceholder');
+  document.getElementById('initTitle').textContent = t('initTitle');
+  document.getElementById('initSub').textContent = t('initSub');
+  document.getElementById('viewAllBtn').textContent = t('viewAllBtn');
+  document.getElementById('cdLabel').textContent = t('cdLabel');
+
+  // Update guest count
+  updateGuestCount();
+
+  // Update footer
+  document.querySelector('footer').innerHTML = t('footer');
+
+  // Update venue line
+  const vl = document.querySelector('.venue-line');
+  if (vl) vl.innerHTML = `${VENUE.addr} <span>·</span> ${VENUE.mrt}`;
+
+  // Refresh current view
+  refreshView();
+}
+
+/* ═══════════════════════════════════════════════════════
+   COUNTDOWN
+   ═══════════════════════════════════════════════════════ */
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = WEDDING_DATE - now;
+
+  if (diff <= 0) {
+    document.getElementById('cdLabel').textContent = t('cdPast');
+    document.getElementById('cdDays').textContent = '🎉';
+    document.getElementById('cdHours').textContent = '';
+    document.getElementById('cdMins').textContent = '';
+    document.getElementById('cdSecs').textContent = '';
+    return;
+  }
+
+  const totalSec = Math.floor(diff / 1000);
+  const d = Math.floor(totalSec / 86400);
+  const h = Math.floor((totalSec % 86400) / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+
+  document.getElementById('cdDays').textContent = String(d).padStart(2,'0');
+  document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cdMins').textContent = String(m).padStart(2,'0');
+  document.getElementById('cdSecs').textContent = String(s).padStart(2,'0');
+}
+
+/* ═══════════════════════════════════════════════════════
+   GENERIC / RELATIONAL TERMS
+   ═══════════════════════════════════════════════════════ */
+
 const genericTerms = ["+1","+ 1","children","child","mother","mother's","wife","wife's",
   "mum","dad","grandma","grandfather","grandmother","brother","sister",
   "husband","family","mil","father","father's","sister in law","sister-in-law"];
@@ -356,13 +647,12 @@ const genericTerms = ["+1","+ 1","children","child","mother","mother's","wife","
 function isGenericSearch(q) {
   const lower = q.trim().toLowerCase();
   if (!lower) return false;
-  // Exact match or the whole query is one of these terms
   return genericTerms.some(t => lower === t);
 }
 
-/* ══════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    UI LOGIC
-   ══════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════ */
 
 const searchInput  = document.getElementById('searchInput');
 const clearBtn     = document.getElementById('clearBtn');
@@ -375,6 +665,7 @@ const modalClose   = document.getElementById('modalClose');
 /* ── Search ── */
 searchInput.addEventListener('input', function() {
   const q = this.value.trim();
+  closeAllTablesView();
   clearBtn.classList.toggle('visible', q.length > 0);
 
   if (q.length === 0) {
@@ -382,7 +673,6 @@ searchInput.addEventListener('input', function() {
     return;
   }
 
-  // Check generic term
   if (isGenericSearch(q)) {
     showGenericTip(q);
     return;
@@ -396,6 +686,7 @@ clearBtn.addEventListener('click', function() {
   searchInput.value = '';
   clearBtn.classList.remove('visible');
   clearGenericTip();
+  closeAllTablesView();
   showInitial();
   searchInput.focus();
 });
@@ -413,6 +704,15 @@ function performSearch(query) {
   }
 }
 
+/* ── Refresh current view after language switch ── */
+function refreshView() {
+  const q = searchInput.value.trim();
+  if (q.length === 0) return;
+  if (isGenericSearch(q)) { showGenericTip(q); return; }
+  clearGenericTip();
+  performSearch(q);
+}
+
 /* ── Generic term tooltip ── */
 function showGenericTip(term) {
   initialState.style.display = 'none';
@@ -420,8 +720,8 @@ function showGenericTip(term) {
   genericTip.innerHTML = `
     <div class="generic-tip">
       <div class="tip-icon">🔍</div>
-      <p>Guest matching "<strong>${escapeHtml(term)}</strong>" may be listed under the <strong>primary invitee's name</strong>.</p>
-      <p class="tip-sub">Try searching for the person they are accompanying or their family name.</p>
+      <p>${t('genericTipTitle')}<strong>${escapeHtml(term)}</strong>${t('genericTipMid')}<strong>${t('genericTipStrong')}</strong>.</p>
+      <p class="tip-sub">${t('genericTipSub')}</p>
     </div>
   `;
 }
@@ -437,35 +737,69 @@ function showInitial() {
   clearGenericTip();
 }
 
+function showNoResults(query) {
+  initialState.style.display = 'none';
+  const tipsZh = currentLang === 'zh' ? `
+    🔹 检查拼写<br>
+    🔹 尝试仅输入名或姓<br>
+    🔹 如果宾客是"+1"或家属，<br>
+    &nbsp;&nbsp;&nbsp;请搜索主要受邀人的姓名<br>
+    🔹 询问婚礼筹备人员
+  ` : `
+    🔹 Check the spelling<br>
+    🔹 Try just the first name or surname<br>
+    🔹 If the guest was invited as a "+1" or family member,<br>
+    &nbsp;&nbsp;&nbsp;search for the main invitee's name instead<br>
+    🔹 Ask a member of the wedding party for help
+  `;
+  resultsArea.innerHTML = `
+    <div class="no-results">
+      <div class="sad-icon">🌿</div>
+      <h3>${t('noResultsTitle')}</h3>
+      <p>${t('noResultsMsg')}<strong>${escapeHtml(query)}</strong>${t('noResultsMsg2')}</p>
+      <div class="tips">${tipsZh}</div>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SEARCH RESULTS — with inline table preview
+   ═══════════════════════════════════════════════════════ */
+
 function showResults(matches, query) {
   initialState.style.display = 'none';
-  const html = `<div class="guest-list">${
+
+  // Collect unique table names from matches
+  const tables = [...new Set(matches.map(g => g.table))].sort(
+    (a,b) => tableOrder.indexOf(a) - tableOrder.indexOf(b)
+  );
+
+  // Build guest cards (existing style)
+  let cardsHtml = `<div class="guest-list">${
     matches.map(g =>
       `<div class="guest-card" onclick="openTable('${g.table}')">
-        <span class="guest-name">${highlight(g.name, query)}</span>
+        <span class="guest-name">${highlight(g.name, query)}${g.diet === 'veg' ? '&nbsp;🥗' : ''}</span>
         <span class="table-badge">${tableLabel[g.table] || g.table}</span>
       </div>`
     ).join('')
   }</div>`;
-  resultsArea.innerHTML = html;
-}
 
-function showNoResults(query) {
-  initialState.style.display = 'none';
-  resultsArea.innerHTML = `
-    <div class="no-results">
-      <div class="sad-icon">🌿</div>
-      <h3>Name not found</h3>
-      <p>We couldn't find "<strong>${escapeHtml(query)}</strong>" in the guest list.</p>
-      <div class="tips">
-        🔹 Check the spelling<br>
-        🔹 Try just the first name or surname<br>
-        🔹 If the guest was invited as a "+1" or family member,<br>
-        &nbsp;&nbsp;&nbsp;search for the main invitee's name instead<br>
-        🔹 Ask a member of the wedding party for help
-      </div>
-    </div>
-  `;
+  // Build inline table previews — show ALL guests at each matched table
+  const previews = tables.map(t => {
+    const guests = guestData.filter(g => g.table === t);
+    return `<div class="table-preview" onclick="openTable('${t}')">
+      <div class="tp-title">${tableLabel[t] || t} <span style="font-style:italic;font-size:.82rem;color:var(--ink-muted);font-weight:400">(${guests.length} ${guests.length > 1 ? t('guestPlural') : t('guestSingular')})</span></div>
+      ${guests.map((g,i) =>
+        `<div class="tp-guest">
+          <span class="tp-num">${i+1}</span>
+          <span>${escapeHtml(g.name)}${g.diet === 'veg' ? ' 🥗' : ''}</span>
+        </div>`
+      ).join('')}
+      <div class="tp-click">${t('previewSeeAll')}</div>
+    </div>`;
+  }).join('');
+
+  resultsArea.innerHTML = cardsHtml + previews;
 }
 
 /* ── Helpers ── */
@@ -483,33 +817,100 @@ function escapeHtml(str) {
   return d.innerHTML;
 }
 
-/* ══════════════════════════════════════════
-   TABLE VIEW
-   ══════════════════════════════════════════ */
+function updateGuestCount() {
+  const suffix = t('tables');
+  const gs = t('guestCount');
+  document.getElementById('guestCount').textContent =
+    `${guestData.length}${gs}${tableOrder.length}${suffix}`;
+}
+
+/* ═══════════════════════════════════════════════════════
+   VIEW ALL TABLES
+   ═══════════════════════════════════════════════════════ */
+
+let allTablesOpen = false;
+
+function toggleAllTables() {
+  const view = document.getElementById('allTablesView');
+  const btn = document.getElementById('viewAllBtn');
+  allTablesOpen = !allTablesOpen;
+  view.classList.toggle('open', allTablesOpen);
+  btn.textContent = allTablesOpen ? '✕ ' + t('viewAllBtn') : t('viewAllBtn');
+
+  // Close search results when opening all tables
+  if (allTablesOpen) {
+    searchInput.value = '';
+    clearBtn.classList.remove('visible');
+    showInitial();
+  }
+
+  if (allTablesOpen && !view.querySelector('.all-tables-group')) {
+    renderAllTables();
+  }
+}
+
+function closeAllTablesView() {
+  allTablesOpen = false;
+  document.getElementById('allTablesView').classList.remove('open');
+  document.getElementById('viewAllBtn').textContent = t('viewAllBtn');
+}
+
+function renderAllTables() {
+  const list = document.getElementById('allTablesList');
+  list.innerHTML = tableOrder.map(t => {
+    const guests = guestData.filter(g => g.table === t);
+    return `<div class="all-tables-group">
+      <div class="all-tables-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+        <span class="at-label">${tableLabel[t] || t}</span>
+        <span style="display:flex;align-items:center;gap:.5rem">
+          <span class="at-count">${guests.length} ${guests.length > 1 ? (currentLang === 'zh' ? '位' : 'seats') : (currentLang === 'zh' ? '位' : 'seat')}</span>
+          <span class="at-arrow">▾</span>
+        </span>
+      </div>
+      <div class="all-tables-body">
+        ${guests.map((g,i) =>
+          `<div class="all-tables-guest" onclick="openTable('${t}')">
+            <span class="at-num">${i+1}</span>
+            <span>${escapeHtml(g.name)}${g.diet === 'veg' ? ' 🥗' : ''}</span>
+          </div>`
+        ).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ═══════════════════════════════════════════════════════
+   TABLE VIEW (modal)
+   ═══════════════════════════════════════════════════════ */
 
 function openTable(tableName) {
   const guests = guestData.filter(g => g.table === tableName);
   const cap = guests.length;
 
   document.getElementById('modalTitle').textContent = tableLabel[tableName] || tableName;
-  document.getElementById('modalSubtitle').textContent = `${guests.length} guest${guests.length !== 1 ? 's' : ''}`;
+  document.getElementById('modalSubtitle').textContent = `${guests.length}${guests.length > 1 ? t('guestPlural') : t('guestSingular')}`;
   document.getElementById('tableTileName').textContent = tableName;
-  document.getElementById('tableTileCap').textContent = `${guests.length} seat${guests.length !== 1 ? 's' : ''}`;
+  document.getElementById('tableTileCap').textContent = `${guests.length}${guests.length > 1 ? t('seatPlural') : t('seatSingular')}`;
 
-  // Round table seats
+  // Round table seats — dynamic positioning
   const tableEl = document.getElementById('roundTable');
   tableEl.querySelectorAll('.seat-marker').forEach(el => el.remove());
 
-  for (let i = 0; i < Math.max(cap, 10); i++) {
-    const angle = (i * (360 / Math.max(cap, 10)) - 90) * (Math.PI / 180);
-    const radius = 85;
-    const cx = 110, cy = 110;
-    const x = cx + radius * Math.cos(angle) - 5;
-    const y = cy + radius * Math.sin(angle) - 5;
+  const tableW = tableEl.offsetWidth || 220;
+  const tableH = tableEl.offsetHeight || 220;
+  const cx = tableW / 2;
+  const cy = tableH / 2;
+  const markerRadius = Math.min(tableW, tableH) * 0.38;
+  const seatCount = Math.max(cap, 10);
+
+  for (let i = 0; i < seatCount; i++) {
+    const angle = (i * (360 / seatCount) - 90) * (Math.PI / 180);
+    const x = cx + markerRadius * Math.cos(angle) - 5;
+    const y = cy + markerRadius * Math.sin(angle) - 5;
     const dot = document.createElement('div');
     dot.className = 'seat-marker' + (i < cap ? ' filled' : '');
-    dot.style.left = x + 'px';
-    dot.style.top = y + 'px';
+    dot.style.left = Math.round(x) + 'px';
+    dot.style.top = Math.round(y) + 'px';
     tableEl.appendChild(dot);
   }
 
@@ -517,15 +918,21 @@ function openTable(tableName) {
   document.getElementById('tableGuestList').innerHTML = guests.map((g, i) =>
     `<div class="table-guest-item">
       <span class="seat-num">${i + 1}</span>
-      <span class="guest-name">${escapeHtml(g.name)}</span>
+      <span class="guest-name">${escapeHtml(g.name)}${g.diet === 'veg' ? ' 🥗' : ''}</span>
     </div>`
   ).join('');
 
-  document.getElementById('tableCount').textContent = `${guests.length} guest${guests.length !== 1 ? 's' : ''} at this table`;
+  document.getElementById('tableCount').textContent = `${guests.length}${guests.length > 1 ? t('guestPlural') : t('guestSingular')}${t('atThisTable')}`;
 
-  // Show
+  // Show modal
   modalOverlay.classList.add('active');
   document.body.style.overflow = 'hidden';
+
+  // Scroll modal into view on mobile
+  setTimeout(() => {
+    const modal = document.querySelector('.modal');
+    if (modal) modal.scrollIntoView({behavior:'smooth', block:'center'});
+  }, 100);
 }
 
 function closeModal() {
@@ -541,9 +948,19 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
 });
 
-// Update guest count in header
-document.getElementById('guestCount').textContent =
-  `${guestData.length} guests · ${tableOrder.length} tables`;
+/* ═══════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════ */
+
+// Update guest count
+updateGuestCount();
+
+// Start countdown
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Set default language
+setLang('en');
 
 showInitial();
 </script>
