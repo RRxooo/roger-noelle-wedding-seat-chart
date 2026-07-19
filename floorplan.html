@@ -291,6 +291,15 @@
   }
   .tbl.vip .sub { color: rgba(255,255,255,0.85); }
 
+  /* Highlight for user's table */
+  .tbl.highlight {
+    background: linear-gradient(135deg, #66C2A5, #4DAF91);
+    color: #fff;
+    border-color: #4DAF91;
+    box-shadow: 0 0 20px rgba(77,175,145,0.6);
+  }
+  .tbl.highlight .sub { color: rgba(255,255,255,0.85); }
+
 
   /* Right fixture */
   .right-fixture {
@@ -522,6 +531,37 @@
   </div>
 
 </div>
+
+<script>
+(function(){
+  // Read ?table= from URL
+  var params = new URLSearchParams(window.location.search);
+  var tableName = params.get('table');
+  if (!tableName) return;
+
+  // Normalise: decode URI, trim
+  tableName = decodeURIComponent(tableName).trim();
+
+  // Find all table circles
+  var tables = document.querySelectorAll('.tbl');
+  for (var i = 0; i < tables.length; i++) {
+    var t = tables[i];
+    // Get the text node content before any <span> child
+    var text = '';
+    for (var j = 0; j < t.childNodes.length; j++) {
+      if (t.childNodes[j].nodeType === 3) { // text node
+        text += t.childNodes[j].textContent.trim();
+      }
+    }
+    // Also check the overall text including sub span for fallback
+    var fullText = t.textContent.trim();
+    if (text === tableName || fullText.indexOf(tableName) === 0) {
+      t.classList.add('highlight');
+      break;
+    }
+  }
+})();
+</script>
 
 </body>
 </html>
