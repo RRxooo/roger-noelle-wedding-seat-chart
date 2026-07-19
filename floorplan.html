@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floor Plan — Roger Tan & Noelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@300;400;500;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cormorant Garamond', 'Noto Sans SC', Georgia, serif;
+    background: #f5f0e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .card {
+    width: 1180px;
+    max-width: 100%;
+    background: #FFFAF3;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(44,44,44,0.12);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── Decorative borders ── */
+  .deco-strip {
+    height: 54px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #FFFAF3 0%, rgba(212,240,232,0.3) 100%);
+  }
+  .deco-strip::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 5%, #C4A962 20%, #99D6BF 40%, #C4A962 50%, #99D6BF 60%, #C4A962 80%, transparent 95%);
+    opacity: 0.4;
+  }
+
+  .deco-strip-bot {
+    height: 54px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(0deg, #FFFAF3 0%, rgba(212,240,232,0.3) 100%);
+  }
+  .deco-strip-bot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 5%, #C4A962 20%, #99D6BF 40%, #C4A962 50%, #99D6BF 60%, #C4A962 80%, transparent 95%);
+    opacity: 0.4;
+  }
+
+  /* Floral ornaments */
+  .floral {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .floral-1 { top: 4px; left: 20px; }
+  .floral-2 { top: 6px; left: 120px; transform: rotate(15deg); }
+  .floral-3 { top: 2px; right: 140px; transform: rotate(-10deg); }
+  .floral-4 { top: 5px; right: 20px; transform: rotate(8deg); }
+  .floral-5 { top: 14px; left: 50%; margin-left: -20px; }
+  .floral-bot-1 { bottom: 6px; left: 30px; transform: rotate(180deg); }
+  .floral-bot-2 { bottom: 8px; left: 150px; transform: rotate(190deg); }
+  .floral-bot-3 { bottom: 4px; right: 130px; transform: rotate(170deg); }
+  .floral-bot-4 { bottom: 6px; right: 25px; transform: rotate(185deg); }
+  .floral-bot-5 { bottom: 16px; left: 50%; margin-left: -15px; transform: rotate(180deg); }
+
+  .floral svg { width: 36px; height: 36px; }
+  .floral-sm svg { width: 28px; height: 28px; }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 8px 30px 12px;
+    position: relative;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: #4DAF91;
+    letter-spacing: 0.06em;
+  }
+  .header .sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    color: #8A8A8A;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+  .header .couple {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2C2C2C;
+    margin-top: 6px;
+    letter-spacing: 0.1em;
+  }
+  .header .couple .amp {
+    color: #C4A962;
+    font-weight: 400;
+    font-style: italic;
+  }
+  .header .date {
+    font-size: 14px;
+    color: #5A5A5A;
+    margin-top: 3px;
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+  .header .venue-line {
+    font-size: 12px;
+    color: #8A8A8A;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  .header .venue-line strong {
+    color: #4DAF91;
+    font-weight: 600;
+  }
+
+  /* ── Logo ── */
+  .venue-logo {
+    position: absolute;
+    top: 10px;
+    right: 22px;
+    text-align: right;
+    z-index: 5;
+  }
+  .venue-logo .jen {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #2C2C2C;
+    letter-spacing: 0.15em;
+    line-height: 1;
+  }
+  .venue-logo .by {
+    font-size: 7px;
+    color: #8A8A8A;
+    letter-spacing: 0.1em;
+  }
+  .venue-logo .loc {
+    font-size: 7px;
+    color: #8A8A8A;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    text-align: center;
+    padding: 1px 30px 2px;
+    color: #C4A962;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    opacity: 0.5;
+  }
+
+  /* ── Floor plan ── */
+  .floorplan-wrap {
+    padding: 0 28px 8px;
+  }
+  .floorplan {
+    border: 2.5px solid #2C2C2C;
+    border-radius: 8px;
+    background: #FDF7ED;
+    position: relative;
+    height: 380px;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* Stage */
+  .stage {
+    width: 50px;
+    min-width: 50px;
+    background: linear-gradient(180deg, #66C2A5, #4DAF91);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #fff;
+    letter-spacing: 0.15em;
+    text-orientation: mixed;
+    position: relative;
+    border-right: 2px solid #2C2C2C;
+  }
+  .stage-spot {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #E8D9A8;
+  }
+  .stage-spot-1 { top: 35px; right: 8px; }
+  .stage-spot-2 { bottom: 35px; right: 8px; }
+
+  /* Seating area */
+  .seating {
+    flex: 1;
+    position: relative;
+    padding: 18px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+  }
+
+  /* Dashed lines */
+  .dash-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-left: 2px dashed #C5D0B8;
+    z-index: 1;
+  }
+  .dash-1 { left: 28%; }
+  .dash-2 { left: 51%; }
+  .dash-3 { left: 74%; }
+
+  /* Table rows */
+  .table-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Table circles */
+  .tbl {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    border: 2.5px solid #2C2C2C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #FFFAF3;
+    font-family: 'Noto Sans SC', 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #2C2C2C;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .tbl .sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #8A8A8A;
+    font-style: italic;
+    margin-top: 3px;
+  }
+  .tbl.vip {
+    background: linear-gradient(135deg, #66C2A5, #4DAF91);
+    color: #fff;
+    border-color: #4DAF91;
+    width: 128px;
+    height: 128px;
+    font-size: 22px;
+  }
+  .tbl.vip .sub { color: rgba(255,255,255,0.85); }
+  .tbl.spacer {
+    border-color: transparent;
+    background: transparent;
+    visibility: hidden;
+  }
+
+  /* Right fixture */
+  .right-fixture {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 7px;
+    height: 50px;
+    background: #D4F0E8;
+    border-radius: 3px;
+    border: 1px solid #99D6BF;
+    z-index: 1;
+  }
+
+  /* Exit mark */
+  .exit-mark {
+    position: absolute;
+    right: 22px;
+    bottom: 28px;
+    font-size: 14px;
+    color: #5A5A5A;
+    z-index: 3;
+    opacity: 0.5;
+  }
+
+  /* Floor fixtures */
+  .floor-fixtures {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 16%;
+    z-index: 1;
+  }
+  .fixture {
+    width: 14px;
+    height: 8px;
+    background: #2C2C2C;
+    border-radius: 0 0 7px 7px;
+    opacity: 0.6;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 6px 30px 12px;
+  }
+  .footer .note {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 12px;
+    color: #8A8A8A;
+    font-style: italic;
+  }
+  .footer .room {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #4DAF91;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- ═══ TOP DECO ═══ -->
+  <div class="deco-strip">
+    <!-- Floral sprigs -->
+    <svg class="floral floral-1" viewBox="0 0 36 36" fill="none">
+      <path d="M18 34C6 34 2 22 2 18S6 4 18 2" stroke="#99D6BF" stroke-width="1.2" fill="none"/>
+      <path d="M18 34C30 34 34 22 34 18S30 4 18 2" stroke="#C4A962" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <circle cx="18" cy="8" r="4" fill="#D4F0E8" opacity="0.6"/>
+      <circle cx="10" cy="14" r="3" fill="#99D6BF" opacity="0.4"/>
+      <circle cx="26" cy="14" r="3" fill="#99D6BF" opacity="0.4"/>
+      <circle cx="14" cy="24" r="2.5" fill="#C5D0B8" opacity="0.3"/>
+      <circle cx="22" cy="24" r="2.5" fill="#C5D0B8" opacity="0.3"/>
+    </svg>
+    <svg class="floral floral-2 floral-sm" viewBox="0 0 28 28" fill="none">
+      <path d="M14 26C4 26 2 16 2 14S4 4 14 2" stroke="#C4A962" stroke-width="1" fill="none" opacity="0.6"/>
+      <circle cx="8" cy="10" r="3.5" fill="#D4F0E8" opacity="0.5"/>
+      <circle cx="14" cy="6" r="2.5" fill="#99D6BF" opacity="0.4"/>
+      <circle cx="20" cy="10" r="3" fill="#E8D9A8" opacity="0.4"/>
+    </svg>
+    <svg class="floral floral-3 floral-sm" viewBox="0 0 28 28" fill="none">
+      <path d="M14 26C24 26 26 16 26 14S24 4 14 2" stroke="#99D6BF" stroke-width="1" fill="none" opacity="0.5"/>
+      <circle cx="20" cy="10" r="3.5" fill="#D4F0E8" opacity="0.5"/>
+      <circle cx="14" cy="6" r="2.5" fill="#C4A962" opacity="0.3"/>
+      <circle cx="8" cy="10" r="3" fill="#99D6BF" opacity="0.4"/>
+    </svg>
+    <svg class="floral floral-4" viewBox="0 0 36 36" fill="none">
+      <path d="M18 34C6 34 2 22 2 18S6 4 18 2" stroke="#66C2A5" stroke-width="1" fill="none" opacity="0.5"/>
+      <path d="M18 34C30 34 34 22 34 18S30 4 18 2" stroke="#C4A962" stroke-width="0.6" fill="none" opacity="0.3"/>
+      <circle cx="10" cy="12" r="3" fill="#99D6BF" opacity="0.5"/>
+      <circle cx="18" cy="8" r="4" fill="#D4F0E8" opacity="0.5"/>
+      <circle cx="26" cy="12" r="3" fill="#E8D9A8" opacity="0.4"/>
+      <circle cx="14" cy="22" r="2" fill="#C5D0B8" opacity="0.3"/>
+      <circle cx="22" cy="22" r="2" fill="#C5D0B8" opacity="0.3"/>
+    </svg>
+    <svg class="floral floral-5 floral-sm" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="10" r="5" fill="#D4F0E8" opacity="0.4"/>
+      <circle cx="14" cy="6" r="3" fill="#99D6BF" opacity="0.3"/>
+      <circle cx="10" cy="14" r="2.5" fill="#C4A962" opacity="0.3"/>
+      <circle cx="18" cy="14" r="2.5" fill="#C4A962" opacity="0.3"/>
+    </svg>
+  </div>
+
+  <!-- ═══ LOGO ═══ -->
+  <div class="venue-logo">
+    <div class="jen">JEN</div>
+    <div class="by">BY SHANGRI-LA</div>
+    <div class="loc">SINGAPORE<br>TANGLIN</div>
+  </div>
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <h1>Wedding Celebration</h1>
+    <div class="sub">— Seating Arrangement —</div>
+    <div class="couple">Roger Tan <span class="amp">&amp;</span> Noelle</div>
+    <div class="date">Friday, 18 September 2026 &nbsp;·&nbsp; 7:00 PM</div>
+    <div class="venue-line"><strong>JEN</strong> Singapore Tanglin by Shangri‑La</div>
+  </div>
+
+  <div class="divider">✦ ✦ ✦</div>
+
+  <!-- ═══ FLOOR PLAN ═══ -->
+  <div class="floorplan-wrap">
+    <div class="floorplan">
+
+      <!-- Stage -->
+      <div class="stage">
+        STAGE
+        <div class="stage-spot stage-spot-1"></div>
+        <div class="stage-spot stage-spot-2"></div>
+      </div>
+
+      <!-- Seating -->
+      <div class="seating">
+        <div class="dash-line dash-1"></div>
+        <div class="dash-line dash-2"></div>
+        <div class="dash-line dash-3"></div>
+
+        <!-- Front row (near stage) — 7 tables -->
+        <div class="table-row">
+          <div class="tbl vip">VIP<span class="sub">VIP</span></div>
+          <div class="tbl">一萬<span class="sub">10,000</span></div>
+          <div class="tbl">三萬<span class="sub">30,000</span></div>
+          <div class="tbl">五萬<span class="sub">50,000</span></div>
+          <div class="tbl">七萬<span class="sub">70,000</span></div>
+          <div class="tbl">九萬<span class="sub">90,000</span></div>
+          <div class="tbl">发财<span class="sub">Fortune</span></div>
+        </div>
+
+        <!-- Back row — 6 tables + 1 spacer for centering -->
+        <div class="table-row">
+          <div class="tbl">二萬<span class="sub">20,000</span></div>
+          <div class="tbl">四萬<span class="sub">40,000</span></div>
+          <div class="tbl">六萬<span class="sub">60,000</span></div>
+          <div class="tbl">八萬<span class="sub">80,000</span></div>
+          <div class="tbl">白板<span class="sub">Blank</span></div>
+          <div class="tbl">红中<span class="sub">Centre</span></div>
+          <div class="tbl spacer"></div>
+        </div>
+
+        <!-- Right fixture -->
+        <div class="right-fixture"></div>
+
+        <!-- Exit direction -->
+        <div class="exit-mark">➤</div>
+      </div>
+
+      <!-- Floor fixtures -->
+      <div class="floor-fixtures">
+        <div class="fixture"></div>
+        <div class="fixture"></div>
+        <div class="fixture"></div>
+        <div class="fixture"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider">✦ ✦ ✦</div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="footer">
+    <div class="note">Floorplan not drawn to scale</div>
+    <div class="room">Malacca Penang</div>
+  </div>
+
+  <!-- ═══ BOTTOM DECO ═══ -->
+  <div class="deco-strip-bot">
+    <svg class="floral floral-bot-1" viewBox="0 0 36 36" fill="none">
+      <path d="M18 2C6 2 2 14 2 18S6 32 18 34" stroke="#99D6BF" stroke-width="1.2" fill="none"/>
+      <path d="M18 2C30 2 34 14 34 18S30 32 18 34" stroke="#C4A962" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <circle cx="10" cy="22" r="4" fill="#D4F0E8" opacity="0.6"/>
+      <circle cx="18" cy="28" r="3" fill="#99D6BF" opacity="0.4"/>
+      <circle cx="26" cy="22" r="3" fill="#99D6BF" opacity="0.4"/>
+      <circle cx="14" cy="12" r="2.5" fill="#C5D0B8" opacity="0.3"/>
+      <circle cx="22" cy="12" r="2.5" fill="#C5D0B8" opacity="0.3"/>
+    </svg>
+    <svg class="floral floral-bot-2 floral-sm" viewBox="0 0 28 28" fill="none">
+      <path d="M14 2C4 2 2 12 2 14S4 24 14 26" stroke="#C4A962" stroke-width="1" fill="none" opacity="0.6"/>
+      <circle cx="8" cy="18" r="3.5" fill="#D4F0E8" opacity="0.5"/>
+      <circle cx="14" cy="22" r="2.5" fill="#99D6BF" opacity="0.4"/>
+      <circle cx="20" cy="18" r="3" fill="#E8D9A8" opacity="0.4"/>
+    </svg>
+    <svg class="floral floral-bot-3 floral-sm" viewBox="0 0 28 28" fill="none">
+      <path d="M14 2C24 2 26 12 26 14S24 24 14 26" stroke="#99D6BF" stroke-width="1" fill="none" opacity="0.5"/>
+      <circle cx="20" cy="18" r="3.5" fill="#D4F0E8" opacity="0.5"/>
+      <circle cx="14" cy="22" r="2.5" fill="#C4A962" opacity="0.3"/>
+      <circle cx="8" cy="18" r="3" fill="#99D6BF" opacity="0.4"/>
+    </svg>
+    <svg class="floral floral-bot-4" viewBox="0 0 36 36" fill="none">
+      <path d="M18 2C6 2 2 14 2 18S6 32 18 34" stroke="#66C2A5" stroke-width="1" fill="none" opacity="0.5"/>
+      <path d="M18 2C30 2 34 14 34 18S30 32 18 34" stroke="#C4A962" stroke-width="0.6" fill="none" opacity="0.3"/>
+      <circle cx="10" cy="24" r="3" fill="#99D6BF" opacity="0.5"/>
+      <circle cx="18" cy="28" r="4" fill="#D4F0E8" opacity="0.5"/>
+      <circle cx="26" cy="24" r="3" fill="#E8D9A8" opacity="0.4"/>
+      <circle cx="14" cy="14" r="2" fill="#C5D0B8" opacity="0.3"/>
+      <circle cx="22" cy="14" r="2" fill="#C5D0B8" opacity="0.3"/>
+    </svg>
+    <svg class="floral floral-bot-5 floral-sm" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="18" r="5" fill="#D4F0E8" opacity="0.4"/>
+      <circle cx="14" cy="22" r="3" fill="#99D6BF" opacity="0.3"/>
+      <circle cx="10" cy="14" r="2.5" fill="#C4A962" opacity="0.3"/>
+      <circle cx="18" cy="14" r="2.5" fill="#C4A962" opacity="0.3"/>
+    </svg>
+  </div>
+
+</div>
+
+</body>
+</html>
