@@ -499,7 +499,7 @@ footer{
 
   <!-- ═══ Floor Plan link ═══ -->
   <div class="view-all-btn-wrap">
-    <a href="floorplan.html" class="view-all-btn" style="text-decoration:none;display:inline-block">🗺️ View Floor Plan</a>
+    <a href="floorplan.html" class="view-all-btn" style="text-decoration:none;display:inline-block" id="viewFloorPlanBtn">🗺️ View Floor Plan</a>
   </div>
 
   <!-- ═══ Initial state ═══ -->
@@ -519,7 +519,7 @@ footer{
       <div class="mfp-stage">STAGE</div>
       <div class="mfp-seating" id="mfpSeating"></div>
     </div>
-    <div class="mfp-click" onclick="window.open('floorplan.html','_blank')">Tap to enlarge →</div>
+    <div class="mfp-click" onclick="window.open('floorplan.html','_blank')"><span id="mfpClickText">Tap to enlarge →</span></div>
   </div>
 </div>
 
@@ -637,6 +637,8 @@ const i18n = {
   'cdPast':           { en: '✨ Married! 🎉',            zh: '✨ 已礼成！🎉' },
   'previewSeeAll':    { en: 'See all guests at this table →', zh: '查看此桌所有宾客 →' },
   'footer':           { en: '❤️ 百年好合 · Roger Tan & Noelle Ng', zh: '❤️ 百年好合 · Roger Tan & Noelle Ng' },
+  'viewFloorPlan':    { en: '🗺️ View Floor Plan',      zh: '🗺️ 查看座位图' },
+  'tapToEnlarge':     { en: 'Tap to enlarge →',        zh: '点击放大 →' },
   'venueLine':        { en: `${VENUE.addr} · ${VENUE.mrt}`, zh: `${VENUE.addr} · ${VENUE.mrt}` },
 };
 
@@ -661,6 +663,9 @@ function setLang(lang) {
   document.getElementById('initSub').textContent = t('initSub');
   document.getElementById('viewAllBtn').textContent = t('viewAllBtn');
   document.getElementById('cdLabel').textContent = t('cdLabel');
+  document.getElementById('viewFloorPlanBtn').textContent = t('viewFloorPlan');
+  const mfpText = document.getElementById('mfpClickText');
+  if (mfpText) mfpText.textContent = t('tapToEnlarge');
 
   // Update guest count
   updateGuestCount();
@@ -901,6 +906,8 @@ function renderMiniFloorplan(tableName) {
     enlargeLink.setAttribute('onclick',
       `window.open('floorplan.html?table=${encodeURIComponent(tableName)}','_blank')`);
   }
+  const enlargeText = document.getElementById('mfpClickText');
+  if (enlargeText) enlargeText.textContent = t('tapToEnlarge');
 }
 
 /* ── Helpers ── */
